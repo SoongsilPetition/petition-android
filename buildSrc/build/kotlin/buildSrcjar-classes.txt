@@ -1,0 +1,1 @@
+/Users/starbox/Development/projects/Petition-Android/buildSrc/build/classes/kotlin/main/Apps.class:/Users/starbox/Development/projects/Petition-Android/buildSrc/build/classes/kotlin/main/Versions.class
