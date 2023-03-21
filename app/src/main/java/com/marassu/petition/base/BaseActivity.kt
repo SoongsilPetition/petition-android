@@ -1,4 +1,4 @@
-package com.marassu.petition_android.base
+package com.marassu.petition.base
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -9,7 +9,7 @@ android {
     compileSdk = Apps.compileSdk
 
     defaultConfig {
-        applicationId = "com.marassu.petition_android"
+        applicationId = "com.marassu.petition"
         minSdk = Apps.minSdk
         targetSdk = Apps.targetSdk
         versionCode = 1
@@ -53,6 +53,16 @@ android {
 repositories {
     mavenCentral()
     google()
+}
+
+configurations.all {
+    resolutionStrategy {
+        eachDependency {
+            if ((requested.group == "org.jetbrains.kotlin") && (requested.name.startsWith("kotlin-stdlib"))) {
+                useVersion("1.8.0")
+            }
+        }
+    }
 }
 
 dependencies {

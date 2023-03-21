@@ -5,7 +5,7 @@ object Apps {
     const val minSdk = 24
     const val targetSdk = 33
 
-    val javaCompileOption = JavaVersion.VERSION_1_8
+    val javaCompileOption = JavaVersion.VERSION_11
     const val jvmTarget = "11"
 }
 

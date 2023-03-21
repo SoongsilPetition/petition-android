@@ -1,4 +1,4 @@
-package com.marassu.petition_android
+package com.marassu.petition
 
 import org.junit.Test
 

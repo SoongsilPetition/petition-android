@@ -1,4 +1,4 @@
-package com.marassu.petition_android.view.theme
+package com.marassu.petition.view.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

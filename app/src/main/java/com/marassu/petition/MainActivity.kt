@@ -1,9 +1,9 @@
-package com.marassu.petition_android
+package com.marassu.petition
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import com.marassu.petition_android.base.BaseActivity
-import com.marassu.petition_android.view.theme.PetitionTheme
+import com.marassu.petition.base.BaseActivity
+import com.marassu.petition.view.theme.PetitionTheme
 
 class MainActivity : BaseActivity() {
 

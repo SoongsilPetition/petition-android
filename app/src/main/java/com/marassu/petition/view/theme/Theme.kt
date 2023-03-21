@@ -1,4 +1,4 @@
-package com.marassu.petition_android.view.theme
+package com.marassu.petition.view.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

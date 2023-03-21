@@ -1,4 +1,4 @@
-package com.marassu.petition_android.base
+package com.marassu.petition.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

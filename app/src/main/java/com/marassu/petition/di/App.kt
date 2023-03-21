@@ -1,4 +1,4 @@
-package com.marassu.petition_android.di
+package com.marassu.petition.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
