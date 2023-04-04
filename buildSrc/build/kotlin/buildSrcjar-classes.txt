@@ -1,1 +1,0 @@
-/Users/mocha/Development/projects/petition-android/buildSrc/build/classes/kotlin/main/Apps.class:/Users/mocha/Development/projects/petition-android/buildSrc/build/classes/kotlin/main/Versions.class
