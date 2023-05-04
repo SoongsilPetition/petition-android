@@ -9,6 +9,7 @@ java {
 }
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 repositories {
     mavenCentral()
