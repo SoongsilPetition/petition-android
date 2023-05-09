@@ -5,12 +5,12 @@ object Apps {
     const val minSdk = 24
     const val targetSdk = 33
 
-    val javaCompileOption = JavaVersion.VERSION_11
-    const val jvmTarget = "11"
+    val javaCompileOption = JavaVersion.VERSION_17
+    const val jvmTarget = "17"
 }
 
 object Versions {
-    const val kotlin = "1.7.10"
-    const val compose = "1.3.0-beta01"
+    const val kotlin = "1.8.10"
+    const val compose = "1.4.3"
     const val room = "2.4.2"
 }
