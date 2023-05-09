@@ -4,6 +4,13 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = Apps.javaCompileOption
+    targetCompatibility = Apps.javaCompileOption
+}
+dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("com.google.code.gson:gson:2.10.1")
+}
+repositories {
+    mavenCentral()
 }
