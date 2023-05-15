@@ -1,3 +1,5 @@
 rootProject.name = "Petition-Android"
 include(":app")
-include(":model")
+include(":entity")
+include(":domain")
+include(":data")

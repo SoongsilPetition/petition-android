@@ -1,7 +1,7 @@
-package petition_answer
+package com.marassu.entity.petition_answer
 
 import com.google.gson.annotations.SerializedName
-import user.User
+import com.marassu.entity.user.User
 
 data class PetitionAnswer(
     @SerializedName("petitionAnswerId")
@@ -16,7 +16,7 @@ data class PetitionAnswer(
     @SerializedName("petitionAnswerImage")
     val image: String,
 
-    @SerializedName("user")
+    @SerializedName("com/marassu/entity/user")
     val user: User,
 
     @SerializedName("petitionId")

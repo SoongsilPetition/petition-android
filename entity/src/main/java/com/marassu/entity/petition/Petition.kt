@@ -1,7 +1,7 @@
-package petition
+package com.marassu.entity.petition
 
 import com.google.gson.annotations.SerializedName
-import user.User
+import com.marassu.entity.user.User
 
 data class Petition(
     @SerializedName("petitionId")
@@ -25,6 +25,6 @@ data class Petition(
     @SerializedName("petitionDisagreement")
     val disagreement: Long,
 
-    @SerializedName("user")
+    @SerializedName("com/marassu/entity/user")
     val user: User
 )

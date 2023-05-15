@@ -1,4 +1,4 @@
-package user
+package com.marassu.entity.user
 
 import com.google.gson.annotations.SerializedName
 

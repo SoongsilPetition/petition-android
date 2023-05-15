@@ -1,4 +1,4 @@
-package concur
+package com.marassu.entity.concur
 
 import com.google.gson.annotations.SerializedName
 

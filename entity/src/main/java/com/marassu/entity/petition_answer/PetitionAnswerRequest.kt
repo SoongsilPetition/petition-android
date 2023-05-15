@@ -1,4 +1,4 @@
-package petition_answer
+package com.marassu.entity.petition_answer
 
 import com.google.gson.annotations.SerializedName
 

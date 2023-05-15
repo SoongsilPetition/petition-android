@@ -84,8 +84,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
-    // model
-    implementation(project(":model"))
+    // data
+    implementation(project(":data"))
 
     // Hilt, Dagger
     implementation("com.google.dagger:hilt-android:2.44.2")

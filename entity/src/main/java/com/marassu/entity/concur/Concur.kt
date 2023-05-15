@@ -1,7 +1,7 @@
-package concur
+package com.marassu.entity.concur
 
 import com.google.gson.annotations.SerializedName
-import user.User
+import com.marassu.entity.user.User
 
 data class Concur(
     @SerializedName("concurId")
@@ -13,6 +13,6 @@ data class Concur(
     @SerializedName("agreementStatus")
     val agreementStatus: AgreementStatus,
 
-    @SerializedName("user")
+    @SerializedName("com/marassu/entity/user")
     val user: User
 )
