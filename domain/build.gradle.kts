@@ -9,5 +9,7 @@ java {
 }
 
 dependencies {
-    implementation(project(":entity"))
+    api(project(":entity"))
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
 }

@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = "1.4.5"
     }
     packagingOptions {
         resources {
@@ -54,16 +54,6 @@ android {
 repositories {
     mavenCentral()
     google()
-}
-
-configurations.all {
-    resolutionStrategy {
-        eachDependency {
-            if ((requested.group == "org.jetbrains.kotlin") && (requested.name.startsWith("kotlin-stdlib"))) {
-                useVersion("1.8.0")
-            }
-        }
-    }
 }
 
 dependencies {
@@ -88,8 +78,8 @@ dependencies {
     implementation(project(":data"))
 
     // Hilt, Dagger
-    implementation("com.google.dagger:hilt-android:2.44.2")
-    kapt("com.google.dagger:hilt-compiler:2.44.2")
+    implementation("com.google.dagger:hilt-android:2.46")
+    kapt("com.google.dagger:hilt-compiler:2.46")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Retrofit
