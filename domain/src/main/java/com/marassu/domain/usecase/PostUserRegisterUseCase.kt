@@ -4,17 +4,11 @@ import com.marassu.domain.repository.UserRepository
 import com.marassu.entity.user.User
 import com.marassu.entity.user.UserRegisterRequest
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 
 class PostUserRegisterUseCase(private val userRepository: UserRepository) {
-    operator fun invoke(
-        userRegisterRequest: UserRegisterRequest,
-        scope: CoroutineScope, onResult: (User) -> Unit = {}
-    ) {
-        scope.launch(Dispatchers.Main) {
-            val deferred = async(Dispatchers.IO) {
-                userRepository.postUserRegister(userRegisterRequest)
-            }
-            onResult(deferred.await())
-        }
+    suspend fun postUserRegister(userRegisterRequest: UserRegisterRequest): Flow<User> {
+        return userRepository.postUserRegister(userRegisterRequest)
     }
 }
