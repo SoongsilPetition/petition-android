@@ -10,7 +10,7 @@ object Apps {
 }
 
 object Versions {
-    const val kotlin = "1.8.10"
+    const val kotlin = "1.8.20"
     const val compose = "1.4.3"
     const val room = "2.4.2"
 }
