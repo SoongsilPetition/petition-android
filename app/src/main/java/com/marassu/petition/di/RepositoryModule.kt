@@ -1,9 +1,11 @@
 package com.marassu.petition.di
 
 import com.marassu.data.repositoryImpl.ConcurRepositoryImpl
+import com.marassu.data.repositoryImpl.PetitionAnswerRepositoryImpl
 import com.marassu.data.repositoryImpl.PetitionRepositoryImpl
 import com.marassu.data.repositoryImpl.UserRepositoryImpl
 import com.marassu.domain.repository.ConcurRepository
+import com.marassu.domain.repository.PetitionAnswerRepository
 import com.marassu.domain.repository.PetitionRepository
 import com.marassu.domain.repository.UserRepository
 import dagger.Module
@@ -23,13 +25,19 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun providePetitionRepository(repository: PetitionRepositoryImpl): PetitionRepository {
+    fun providesPetitionRepository(repository: PetitionRepositoryImpl): PetitionRepository {
         return repository
     }
 
     @Singleton
     @Provides
-    fun provideConcurRepository(repository: ConcurRepositoryImpl): ConcurRepository {
+    fun providesConcurRepository(repository: ConcurRepositoryImpl): ConcurRepository {
+        return repository
+    }
+
+    @Singleton
+    @Provides
+    fun providePetitionAnswerRepository(repository: PetitionAnswerRepositoryImpl): PetitionAnswerRepository {
         return repository
     }
 }
