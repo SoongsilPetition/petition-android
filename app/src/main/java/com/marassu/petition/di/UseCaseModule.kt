@@ -1,6 +1,9 @@
 package com.marassu.petition.di
 
+import com.marassu.domain.repository.PetitionRepository
 import com.marassu.domain.repository.UserRepository
+import com.marassu.domain.usecase.GetPetitionListUseCase
+import com.marassu.domain.usecase.PostPetitionUseCase
 import com.marassu.domain.usecase.PostUserLoginUseCase
 import com.marassu.domain.usecase.PostUserRegisterUseCase
 import dagger.Module
@@ -22,5 +25,17 @@ object UseCaseModule {
     @Singleton
     fun providePostUserLoginUseCase(repository: UserRepository): PostUserLoginUseCase {
         return PostUserLoginUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetPetitionListUseCase(repository: PetitionRepository): GetPetitionListUseCase {
+        return GetPetitionListUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePostPetitionUseCase(repository: PetitionRepository): PostPetitionUseCase {
+        return PostPetitionUseCase(repository)
     }
 }

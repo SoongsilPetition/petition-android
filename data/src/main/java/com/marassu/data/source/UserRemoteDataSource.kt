@@ -1,14 +1,15 @@
 package com.marassu.data.source
 
 import com.marassu.data.service.UserService
-import com.marassu.entity.user.User
 import com.marassu.entity.user.UserLoginRequest
 import com.marassu.entity.user.UserRegisterRequest
-import javax.inject.Inject
+import retrofit2.Retrofit
 
-class UserRemoteDataSource @Inject constructor(
-    private val userService: UserService
+class UserRemoteDataSource constructor(
+    private val retrofit: Retrofit
 ) {
+    private val userService = retrofit.create(UserService::class.java)
+
     suspend fun postUserRegister(userRegisterRequest: UserRegisterRequest)
     = userService.postUserRegister(userRegisterRequest)
 
