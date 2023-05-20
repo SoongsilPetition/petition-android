@@ -1,5 +1,6 @@
 package com.marassu.petition.di
 
+import com.marassu.data.source.ConcurRemoteDataSource
 import com.marassu.data.source.PetitionRemoteDataSource
 import com.marassu.data.source.UserRemoteDataSource
 import com.marassu.petition.di.qualifiers.ForAuth
@@ -24,5 +25,11 @@ object DataSourceModule {
     @Singleton
     fun providesPetitionRemoteDataSource(@ForAuth retrofit: Retrofit): PetitionRemoteDataSource {
         return PetitionRemoteDataSource(retrofit)
+    }
+
+    @Provides
+    @Singleton
+    fun providesConcurRemoteDataSource(@ForAuth retrofit: Retrofit): ConcurRemoteDataSource {
+        return ConcurRemoteDataSource(retrofit)
     }
 }

@@ -1,4 +1,7 @@
 package com.marassu.domain.usecase
 
-class GetPetitonUseCase {
+import com.marassu.domain.repository.PetitionRepository
+
+class GetPetitionUseCase(private val petitionRepository: PetitionRepository) {
+    suspend fun getPetition(petitionId: Long) = petitionRepository.getPetition(petitionId)
 }

@@ -4,9 +4,8 @@ import com.marassu.data.service.PetitionService
 import com.marassu.entity.petition.PetitionRequest
 import com.marassu.entity.petition.Sort
 import retrofit2.Retrofit
-import javax.inject.Inject
 
-class PetitionRemoteDataSource @Inject constructor(
+class PetitionRemoteDataSource constructor(
     private val retrofit: Retrofit
 ) {
     private val petitionService = retrofit.create(PetitionService::class.java)
