@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.5"
+        kotlinCompilerExtensionVersion = Versions.compose
     }
     packagingOptions {
         resources {
@@ -57,40 +57,39 @@ repositories {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("androidx.core:core-ktx:${Versions.junit}")
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.material:material:${Versions.compose}")
     implementation("androidx.compose.ui:ui-tooling-preview:${Versions.compose}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.1")
-    implementation("androidx.core:core-ktx:1.10.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_runtime_ktx}")
+    implementation("androidx.activity:activity-compose:${Versions.activity_compose}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle_viewmodel_compose}")
+    implementation("androidx.security:security-crypto:${Versions.security_crypto}")
+    testImplementation("junit:junit:${Versions.junit_test}")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.junit_android_test}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso_core}")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Versions.compose}")
     debugImplementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
     debugImplementation("androidx.compose.ui:ui-test-manifest:${Versions.compose}")
-    implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
     // data
     implementation(project(":data"))
 
     // Hilt, Dagger
-    implementation("com.google.dagger:hilt-android:2.46")
-    kapt("com.google.dagger:hilt-compiler:2.46")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.dagger:hilt-android:${Versions.hilt}")
+    kapt("com.google.dagger:hilt-compiler:${Versions.hilt}")
+    implementation("androidx.hilt:hilt-navigation-compose:${Versions.hilt_navigation_compose}")
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:${Versions.retrofit}")
+    implementation("com.squareup.retrofit2:converter-gson:${Versions.retrofit_converter_gson}")
 
     // okHttp
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
-    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.0")
+    implementation("com.squareup.okhttp3:okhttp:${Versions.okhttp}")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:${Versions.okhttp_urlconnection}")
+    implementation("com.squareup.okhttp3:logging-interceptor:${Versions.logging_interceptor}")
 
     // Logging
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.jakewharton.timber:timber:${Versions.timber}")
 }

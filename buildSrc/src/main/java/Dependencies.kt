@@ -10,7 +10,26 @@ object Apps {
 }
 
 object Versions {
-    const val kotlin = "1.8.20"
+    const val gradle = "8.0.1"
+    const val kotlin = "1.8.10"
+    const val hilt_android_gradle_plugin = "2.44.2"
+    const val google_services = "4.3.15"
     const val compose = "1.4.3"
-    const val room = "2.4.2"
+    const val junit = "1.10.1"
+    const val junit_test = "4.13.2"
+    const val junit_android_test = "1.1.5"
+    const val espresso_core = "3.5.1"
+    const val security_crypto = "1.1.0-alpha06"
+    const val lifecycle_runtime_ktx = "2.6.1"
+    const val activity_compose = "1.7.1"
+    const val lifecycle_viewmodel_compose = "2.6.1"
+    const val hilt = "2.46"
+    const val hilt_navigation_compose = "1.0.0"
+    const val retrofit = "2.9.0"
+    const val retrofit_converter_gson = "2.9.0"
+    const val okhttp = "4.10.0"
+    const val okhttp_urlconnection = "4.9.0"
+    const val logging_interceptor = "4.9.2"
+    const val timber = "5.0.1"
+    const val gson = "2.10.1"
 }
