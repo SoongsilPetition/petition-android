@@ -32,4 +32,6 @@ object Versions {
     const val logging_interceptor = "4.9.2"
     const val timber = "5.0.1"
     const val gson = "2.10.1"
+    const val javax_inject = "1"
+    const val kotlinx_coroutines_core = "1.7.1"
 }

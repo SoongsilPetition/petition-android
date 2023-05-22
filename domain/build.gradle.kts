@@ -10,7 +10,7 @@ java {
 
 dependencies {
     api(project(":entity"))
-    implementation("javax.inject:javax.inject:1")
     implementation(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("javax.inject:javax.inject:${Versions.javax_inject}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinx_coroutines_core}")
 }

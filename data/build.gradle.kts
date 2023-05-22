@@ -9,7 +9,7 @@ java {
 }
 dependencies {
     api(project(":domain"))
-    api("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("javax.inject:javax.inject:1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    api("com.squareup.retrofit2:retrofit:${Versions.retrofit}")
+    implementation("javax.inject:javax.inject:${Versions.javax_inject}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinx_coroutines_core}")
 }
