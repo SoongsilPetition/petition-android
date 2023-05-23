@@ -4,8 +4,6 @@ import com.marassu.data.source.ConcurRemoteDataSource
 import com.marassu.data.source.PetitionAnswerRemoteDataSource
 import com.marassu.data.source.PetitionRemoteDataSource
 import com.marassu.data.source.UserRemoteDataSource
-import com.marassu.petition.di.qualifiers.ForAuth
-import com.marassu.petition.di.qualifiers.ForPublic
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,25 +16,25 @@ import javax.inject.Singleton
 object DataSourceModule {
     @Provides
     @Singleton
-    fun providesUserRemoteDataSource(@ForPublic retrofit: Retrofit): UserRemoteDataSource {
-        return UserRemoteDataSource(retrofit)
+    fun providesUserRemoteDataSource(retrofitPair: Pair<Retrofit, Retrofit>): UserRemoteDataSource {
+        return UserRemoteDataSource(retrofitPair)
     }
 
     @Provides
     @Singleton
-    fun providesPetitionRemoteDataSource(@ForAuth retrofit: Retrofit): PetitionRemoteDataSource {
-        return PetitionRemoteDataSource(retrofit)
+    fun providesPetitionRemoteDataSource(retrofitPair: Pair<Retrofit, Retrofit>): PetitionRemoteDataSource {
+        return PetitionRemoteDataSource(retrofitPair)
     }
 
     @Provides
     @Singleton
-    fun providesConcurRemoteDataSource(@ForAuth retrofit: Retrofit): ConcurRemoteDataSource {
-        return ConcurRemoteDataSource(retrofit)
+    fun providesConcurRemoteDataSource(retrofitPair: Pair<Retrofit, Retrofit>): ConcurRemoteDataSource {
+        return ConcurRemoteDataSource(retrofitPair)
     }
 
     @Provides
     @Singleton
-    fun providesPetitionAnswerRemoteDataSource(@ForAuth retrofit: Retrofit): PetitionAnswerRemoteDataSource {
-        return PetitionAnswerRemoteDataSource(retrofit)
+    fun providesPetitionAnswerRemoteDataSource(retrofitPair: Pair<Retrofit, Retrofit>): PetitionAnswerRemoteDataSource {
+        return PetitionAnswerRemoteDataSource(retrofitPair)
     }
 }
