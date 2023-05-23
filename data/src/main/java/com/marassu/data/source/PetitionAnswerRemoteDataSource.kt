@@ -5,22 +5,24 @@ import com.marassu.entity.petition_answer.PetitionAnswerRequest
 import retrofit2.Retrofit
 
 class PetitionAnswerRemoteDataSource(
-    private val retrofit: Retrofit
+    private val retrofitPair: Pair<Retrofit, Retrofit>
 ) {
-    private val petitionAnswerService: PetitionAnswerService =
-        retrofit.create(PetitionAnswerService::class.java)
+    private val publicPetitionAnswerService: PetitionAnswerService =
+        retrofitPair.first.create(PetitionAnswerService::class.java)
+    private val tokenPetitionAnswerService: PetitionAnswerService =
+        retrofitPair.second.create(PetitionAnswerService::class.java)
 
     suspend fun postPetitionAnswer(petitionAnswerRequest: PetitionAnswerRequest) =
-        petitionAnswerService.postPetitionAnswer(petitionAnswerRequest)
+        tokenPetitionAnswerService.postPetitionAnswer(petitionAnswerRequest)
 
     suspend fun getPetitionAnswer(petitionId: Int) =
-        petitionAnswerService.getPetitionAnswer(petitionId)
+        publicPetitionAnswerService.getPetitionAnswer(petitionId)
 
     suspend fun deletePetitionAnswer(petitionId: Int) =
-        petitionAnswerService.deletePetitionAnswer(petitionId)
+        tokenPetitionAnswerService.deletePetitionAnswer(petitionId)
 
     suspend fun modifyPetitionAnswer(
         petitionId: Int,
         petitionAnswerRequest: PetitionAnswerRequest
-    ) = petitionAnswerService.modifyPetitionAnswer(petitionId, petitionAnswerRequest)
+    ) = tokenPetitionAnswerService.modifyPetitionAnswer(petitionId, petitionAnswerRequest)
 }

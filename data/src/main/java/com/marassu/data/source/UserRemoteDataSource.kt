@@ -6,9 +6,9 @@ import com.marassu.entity.user.UserRegisterRequest
 import retrofit2.Retrofit
 
 class UserRemoteDataSource constructor(
-    private val retrofit: Retrofit
+    private val retrofitPair: Pair<Retrofit, Retrofit>
 ) {
-    private val userService = retrofit.create(UserService::class.java)
+    private val userService = retrofitPair.first.create(UserService::class.java)
 
     suspend fun postUserRegister(userRegisterRequest: UserRegisterRequest)
     = userService.postUserRegister(userRegisterRequest)
