@@ -5,7 +5,7 @@ import com.marassu.entity.user.UserLoginRequest
 import kotlinx.coroutines.flow.Flow
 
 class PostUserLoginUseCase(private val userRepository: UserRepository) {
-    suspend fun postUserLogin(userLoginRequest: UserLoginRequest): Flow<Unit> {
+    suspend fun postUserLogin(userLoginRequest: UserLoginRequest): Flow<String> {
         return userRepository.postUserLogin(userLoginRequest)
     }
 }

@@ -12,5 +12,5 @@ interface UserService {
     suspend fun postUserRegister(@Body userRegisterRequest: UserRegisterRequest): Response<User>
 
     @POST("/user/login")
-    suspend fun postUserLogin(@Body userLoginRequest: UserLoginRequest): Response<Unit>
+    suspend fun postUserLogin(@Body userLoginRequest: UserLoginRequest): Response<String>
 }
