@@ -1,12 +1,15 @@
 package com.marassu.petition.feature.login
 
 import android.app.Application
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.marassu.data.source.UserRemoteDataSource
 import com.marassu.data.util.HttpException
 import com.marassu.domain.usecase.PostUserLoginUseCase
 import com.marassu.entity.user.UserLoginRequest
+import com.marassu.petition.di.SharedPreferenceModule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val postUserLoginUseCase: PostUserLoginUseCase,
+    private val sharedPreferences: SharedPreferences,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -44,6 +48,9 @@ class LoginViewModel @Inject constructor(
                     }
                 }
                 .collect {
+                    sharedPreferences.edit {
+                        putString(SharedPreferenceModule.ACCESS_TOKEN, it)
+                    }
                     Timber.d("success")
                     Timber.d("token : $it")
                 }
