@@ -34,4 +34,5 @@ object Versions {
     const val gson = "2.10.1"
     const val javax_inject = "1"
     const val kotlinx_coroutines_core = "1.7.1"
+    const val compose_bom = "2022.10.00"
 }
