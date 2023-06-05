@@ -8,10 +8,12 @@ import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,8 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
-
-    @Preview
     @Composable
     override fun Content() {
         PetitionTheme {
@@ -30,17 +30,30 @@ class LoginActivity : BaseActivity() {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                emailTextField()
-                passwordTextField()
-                loginButton()
+                val viewModel: LoginViewModel = hiltViewModel()
+                EmailTextField(viewModel::setEmail)
+                PasswordTextField(viewModel::setPassword)
+                LoginButton(viewModel::login)
             }
         }
     }
 
+    @Preview(showSystemUi = true)
     @Composable
-    fun emailTextField(viewModel: LoginViewModel = hiltViewModel()) {
-        val email = viewModel.email.collectAsState()
+    fun PreviewLoginActivity() {
+        PetitionTheme {
+            Column {
+                EmailTextField(onValueChange = { })
+                PasswordTextField(onValueChange = { })
+                LoginButton { }
+            }
+        }
+    }
 
+
+    @Composable
+    fun EmailTextField(onValueChange: (String) -> Unit) {
+        val email = remember { mutableStateOf("") }
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -50,15 +63,17 @@ class LoginActivity : BaseActivity() {
                 keyboardType = KeyboardType.Email,
                 imeAction = ImeAction.Next
             ),
-            onValueChange = viewModel::setEmail,
+            onValueChange = {
+                email.value = it
+                onValueChange(it)
+            },
             label = { Text("email") }
         )
     }
 
     @Composable
-    fun passwordTextField(viewModel: LoginViewModel = hiltViewModel()) {
-        val password = viewModel.password.collectAsState()
-
+    fun PasswordTextField(onValueChange: (String) -> Unit) {
+        val password = remember { mutableStateOf("") }
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -68,16 +83,22 @@ class LoginActivity : BaseActivity() {
                 keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Done
             ),
-            onValueChange = viewModel::setPassword,
+            visualTransformation = PasswordVisualTransformation(),
+            onValueChange = {
+                password.value = it
+                onValueChange(it)
+            },
             label = { Text("password") }
         )
     }
 
     @Composable
-    fun loginButton(viewModel: LoginViewModel = hiltViewModel()) {
-        Button(onClick = { viewModel.login() }, modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)) {
+    fun LoginButton(onClick: () -> Unit) {
+        Button(
+            onClick = onClick, modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+        ) {
             Text("로그인")
         }
     }
