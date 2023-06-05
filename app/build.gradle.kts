@@ -42,9 +42,9 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -67,10 +67,14 @@ dependencies {
     implementation("androidx.activity:activity-compose:${Versions.activity_compose}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle_viewmodel_compose}")
     implementation("androidx.security:security-crypto:${Versions.security_crypto}")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.material3:material3")
+    implementation(platform("androidx.compose:compose-bom:${Versions.compose_bom}"))
     testImplementation("junit:junit:${Versions.junit_test}")
     androidTestImplementation("androidx.test.ext:junit:${Versions.junit_android_test}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso_core}")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Versions.compose}")
+    androidTestImplementation(platform("androidx.compose:compose-bom:${Versions.compose_bom}"))
     debugImplementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
     debugImplementation("androidx.compose.ui:ui-test-manifest:${Versions.compose}")
 
