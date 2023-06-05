@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
     suspend fun postUserRegister(userRegisterRequest: UserRegisterRequest): Flow<User>
 
-    suspend fun postUserLogin(userLoginRequest: UserLoginRequest): Flow<Unit>
+    suspend fun postUserLogin(userLoginRequest: UserLoginRequest): Flow<String>
 }

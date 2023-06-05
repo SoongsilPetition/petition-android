@@ -1,6 +1,7 @@
 package com.marassu.data.repositoryImpl
 
 import com.marassu.data.source.ConcurRemoteDataSource
+import com.marassu.data.util.CommonAPILogic
 import com.marassu.domain.repository.ConcurRepository
 import com.marassu.entity.concur.AgreementStatus
 import com.marassu.entity.concur.Concur
@@ -18,19 +19,11 @@ class ConcurRepositoryImpl @Inject constructor(
         page: Int,
         size: Int
     ): Flow<ArrayList<Concur>> {
-        return flow {
-            concurRemoteDataSource.getConcurList(petitionId, agreementStatus, page, size).body()?.let {
-                emit(it)
-            }
-        }
+        return CommonAPILogic.checkError(concurRemoteDataSource.getConcurList(petitionId, agreementStatus, page, size))
     }
 
     override suspend fun postConcur(concurRequest: ConcurRequest): Flow<Concur> {
-        return flow {
-            concurRemoteDataSource.postConcur(concurRequest).body()?.let {
-                emit(it)
-            }
-        }
+        return CommonAPILogic.checkError(concurRemoteDataSource.postConcur(concurRequest))
     }
 
     override suspend fun getUserConcurList(
@@ -38,10 +31,6 @@ class ConcurRepositoryImpl @Inject constructor(
         page: Int,
         size: Int
     ): Flow<ArrayList<Concur>> {
-        return flow {
-            concurRemoteDataSource.getUserConcurList(userId, page, size).body()?.let {
-                emit(it)
-            }
-        }
+        return CommonAPILogic.checkError(concurRemoteDataSource.getUserConcurList(userId, page, size))
     }
 }

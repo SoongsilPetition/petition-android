@@ -1,6 +1,7 @@
 package com.marassu.data.repositoryImpl
 
 import com.marassu.data.source.PetitionRemoteDataSource
+import com.marassu.data.util.CommonAPILogic
 import com.marassu.domain.repository.PetitionRepository
 import com.marassu.entity.petition.Petition
 import com.marassu.entity.petition.PetitionRequest
@@ -18,27 +19,15 @@ class PetitionRepositoryImpl @Inject constructor(
         sort: Sort,
         category: String
     ): Flow<ArrayList<Petition>> {
-        return flow {
-            petitionRemoteDataSource.getPetitionList(page, size, sort, category).body()?.let {
-                emit(it)
-            }
-        }
+        return CommonAPILogic.checkError(petitionRemoteDataSource.getPetitionList(page, size, sort, category))
     }
 
     override suspend fun postPetition(petitionRequest: PetitionRequest): Flow<Petition> {
-        return flow {
-            petitionRemoteDataSource.postPetition(petitionRequest).body()?.let {
-                emit(it)
-            }
-        }
+        return CommonAPILogic.checkError(petitionRemoteDataSource.postPetition(petitionRequest))
     }
 
     override suspend fun getPetition(petitionId: Long): Flow<Petition> {
-        return flow {
-            petitionRemoteDataSource.getPetition(petitionId).body()?.let {
-                emit(it)
-            }
-        }
+        return CommonAPILogic.checkError(petitionRemoteDataSource.getPetition(petitionId))
     }
 
 }
