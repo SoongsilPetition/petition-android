@@ -7,8 +7,8 @@ data class Petition(
     @SerializedName("petitionId")
     val id: String,
 
-    @SerializedName("petitonTitle")
-    val titile: String,
+    @SerializedName("petitionTitle")
+    val title: String,
 
     @SerializedName("petitionContent")
     val content: String,
@@ -26,5 +26,11 @@ data class Petition(
     val disagreement: Long,
 
     @SerializedName("com/marassu/entity/user")
-    val user: User
+    val user: User,
+
+    @SerializedName("createdAt")
+    val createdAt: String,
+
+    @SerializedName("updatedAt")
+    val updatedAt: String
 )
