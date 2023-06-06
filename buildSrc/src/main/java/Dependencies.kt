@@ -35,4 +35,5 @@ object Versions {
     const val javax_inject = "1"
     const val kotlinx_coroutines_core = "1.7.1"
     const val compose_bom = "2023.05.01"
+    const val compose_navigation = "2.5.3"
 }
