@@ -1,5 +1,6 @@
 package com.marassu.petition.di
 
+import com.marassu.data.source.CategoryRemoteDataSource
 import com.marassu.data.source.ConcurRemoteDataSource
 import com.marassu.data.source.PetitionAnswerRemoteDataSource
 import com.marassu.data.source.PetitionRemoteDataSource
@@ -36,5 +37,11 @@ object DataSourceModule {
     @Singleton
     fun providesPetitionAnswerRemoteDataSource(retrofitPair: Pair<Retrofit, Retrofit>): PetitionAnswerRemoteDataSource {
         return PetitionAnswerRemoteDataSource(retrofitPair)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryRemoteDataSource(retrofitPair: Pair<Retrofit, Retrofit>): CategoryRemoteDataSource {
+        return CategoryRemoteDataSource(retrofitPair)
     }
 }

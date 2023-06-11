@@ -70,6 +70,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.material3:material3")
     implementation(platform("androidx.compose:compose-bom:${Versions.compose_bom}"))
+    implementation("androidx.paging:paging-compose:3.2.0-beta01")
     testImplementation("junit:junit:${Versions.junit_test}")
     androidTestImplementation("androidx.test.ext:junit:${Versions.junit_android_test}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso_core}")
@@ -101,4 +102,7 @@ dependencies {
 
     // Logging
     implementation("com.jakewharton.timber:timber:${Versions.timber}")
+
+    //paging
+    implementation("androidx.paging:paging-runtime:${Versions.paging_runtime}")
 }

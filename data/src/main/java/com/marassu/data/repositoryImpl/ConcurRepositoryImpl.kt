@@ -7,7 +7,6 @@ import com.marassu.entity.concur.AgreementStatus
 import com.marassu.entity.concur.Concur
 import com.marassu.entity.concur.ConcurRequest
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class ConcurRepositoryImpl @Inject constructor(
