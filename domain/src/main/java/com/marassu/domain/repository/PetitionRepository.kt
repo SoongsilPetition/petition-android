@@ -14,6 +14,13 @@ interface PetitionRepository {
         category: String? = null
     ): Flow<PagingData<Petition>>
 
+    fun getCompletedPetitionList(
+        page: Int = 1,
+        size: Int = 10,
+        sort: Sort = Sort.CREATED_AT,
+        category: String? = null
+    ): Flow<PagingData<Petition>>
+
     suspend fun postPetition(petitionRequest: PetitionRequest): Flow<Petition>
 
     suspend fun getPetition(petitionId: Long): Flow<Petition>

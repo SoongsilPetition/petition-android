@@ -36,6 +36,23 @@ class PetitionRemoteDataSource constructor(
         ).flow
     }
 
+    fun getCompletedPetitionList(
+        page: Int = 1,
+        size: Int = 10,
+        sort: Sort = Sort.CREATED_AT,
+        category: String? = null
+    ): Flow<PagingData<Petition>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                PetitionCompletedPageSource(service = publicPetitionService, sort, category)
+            }
+        ).flow
+    }
+
     suspend fun postPetition(petitionRequest: PetitionRequest) = tokenPetitionService.postPetition(petitionRequest)
 
     suspend fun getPetition(petitionId: Long) = publicPetitionService.getPetition(petitionId)
