@@ -1,8 +1,6 @@
 package com.marassu.petition.view.atom
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,7 +23,7 @@ import com.marassu.petition.view.theme.Selected
 import com.marassu.petition.view.theme.Stroke
 
 @Composable
-fun CustomBottomBar(
+fun BottomBar(
     selectedRoute: String,
     onItemSelected: (Screen) -> Unit
 ) {
@@ -71,5 +69,5 @@ fun CustomBottomBar(
 @Composable
 fun CustomBottomBarNavigation() {
     val selectedRoute = Screen.Home.route
-    CustomBottomBar(selectedRoute = selectedRoute, onItemSelected = {})
+    BottomBar(selectedRoute = selectedRoute, onItemSelected = {})
 }
