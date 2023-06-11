@@ -150,7 +150,8 @@ fun PetitionListItemPreview() {
         disagreement = 10,
         user = userTest,
         createdAt = "",
-        updatedAt = ""
+        updatedAt = "",
+        dueDate = ""
     )
     PetitionTheme() {
         PetitionListItem(petitionTest, {})

@@ -32,5 +32,8 @@ data class Petition(
     val createdAt: String,
 
     @SerializedName("updatedAt")
-    val updatedAt: String
+    val updatedAt: String,
+
+    @SerializedName("petitionDueDate")
+    val dueDate: String
 )
