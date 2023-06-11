@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,7 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.marassu.petition.base.BaseActivity
-import com.marassu.petition.view.atom.CustomBottomBar
+import com.marassu.petition.view.atom.BottomBar
 import com.marassu.petition.view.navigation.Screen
 import com.marassu.petition.view.navigation.SetUpBottomNavGraph
 import com.marassu.petition.view.theme.PetitionTheme
@@ -28,7 +27,7 @@ class MainActivity : BaseActivity() {
 
         PetitionTheme() {
             Scaffold(bottomBar = {
-                CustomBottomBar(selectedRoute = currentRoute, onItemSelected = {
+                BottomBar(selectedRoute = currentRoute, onItemSelected = {
                     currentRoute = it.route
                     navController.popBackStack()
                     navController.navigate(currentRoute)
