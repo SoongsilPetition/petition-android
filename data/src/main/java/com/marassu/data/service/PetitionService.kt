@@ -19,6 +19,14 @@ interface PetitionService {
         @Query("category") category: String? = null
     ): Response<List<Petition>>
 
+    @GET("/petition/completed")
+    suspend fun getCompletedPetitionList(
+        @Query("page") page: Int = 1,
+        @Query("size") size: Int = 10,
+        @Query("sort") sort: Sort = Sort.CREATED_AT,
+        @Query("category") category: String? = null
+    ): Response<List<Petition>>
+
     @POST("/petition")
     suspend fun postPetition(@Body petitionRequest: PetitionRequest): Response<Petition>
 
