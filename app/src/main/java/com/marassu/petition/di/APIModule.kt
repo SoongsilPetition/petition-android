@@ -1,5 +1,6 @@
 package com.marassu.petition.di
 
+import com.marassu.data.util.EnumConverterFactory
 import com.marassu.petition.di.qualifiers.ForAccessToken
 import com.marassu.petition.di.qualifiers.ForLogging
 import dagger.Module
@@ -24,6 +25,7 @@ object APIModule {
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(EnumConverterFactory())
             .client(loggingOkHttpClient)
             .build()
 
@@ -31,6 +33,7 @@ object APIModule {
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(EnumConverterFactory())
             .client(accessTokenHttpClient)
             .build()
 

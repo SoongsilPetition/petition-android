@@ -50,14 +50,6 @@ fun PetitionListItem(petition: Petition, onClick: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = petition.categoryList[0].categoryName, color = TextSub, style = TextStyle(
-                    fontFamily = notosanskr,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 8.sp,
-                    platformStyle = PlatformTextStyle(includeFontPadding = false)
-                )
-            )
-            Text(
                 text = "D-1",
                 color = TextMain,
                 style = TextStyle(

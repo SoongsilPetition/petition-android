@@ -17,8 +17,10 @@ import com.marassu.petition.view.atom.CustomBottomBar
 import com.marassu.petition.view.navigation.Screen
 import com.marassu.petition.view.navigation.SetUpBottomNavGraph
 import com.marassu.petition.view.theme.PetitionTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     @Composable
