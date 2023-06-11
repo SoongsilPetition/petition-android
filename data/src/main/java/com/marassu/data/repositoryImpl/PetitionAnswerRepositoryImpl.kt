@@ -6,7 +6,6 @@ import com.marassu.domain.repository.PetitionAnswerRepository
 import com.marassu.entity.petition_answer.PetitionAnswer
 import com.marassu.entity.petition_answer.PetitionAnswerRequest
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PetitionAnswerRepositoryImpl @Inject constructor(

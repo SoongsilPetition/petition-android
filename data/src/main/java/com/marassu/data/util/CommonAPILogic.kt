@@ -1,5 +1,7 @@
 package com.marassu.data.util
 
+import androidx.paging.PagingData
+import com.marassu.entity.petition.Petition
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
