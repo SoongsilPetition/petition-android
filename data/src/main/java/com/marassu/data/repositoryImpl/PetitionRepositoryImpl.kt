@@ -19,7 +19,7 @@ class PetitionRepositoryImpl @Inject constructor(
         sort: Sort,
         category: String?
     ): Flow<PagingData<Petition>> {
-        return petitionRemoteDataSource.getPetitionList()
+        return petitionRemoteDataSource.getPetitionList(page, size, sort, category)
     }
     override suspend fun postPetition(petitionRequest: PetitionRequest): Flow<Petition> {
         return CommonAPILogic.checkError(petitionRemoteDataSource.postPetition(petitionRequest))

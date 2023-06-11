@@ -1,10 +1,12 @@
 package com.marassu.petition.di
 
+import com.marassu.domain.repository.CategoryRepository
 import com.marassu.domain.repository.ConcurRepository
 import com.marassu.domain.repository.PetitionAnswerRepository
 import com.marassu.domain.repository.PetitionRepository
 import com.marassu.domain.repository.UserRepository
 import com.marassu.domain.usecase.DeletePetitionAnswerUseCase
+import com.marassu.domain.usecase.GetCategoryUseCase
 import com.marassu.domain.usecase.GetConcurListUseCase
 import com.marassu.domain.usecase.GetPetitionAnswerUseCase
 import com.marassu.domain.usecase.GetPetitionListUseCase
@@ -89,5 +91,11 @@ object UseCaseModule {
     @Singleton
     fun providesPatchPetitionAnswerUseCase(repository: PetitionAnswerRepository): PatchPetitionAnswerUseCase {
         return PatchPetitionAnswerUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCategoryUseCase(repository: CategoryRepository): GetCategoryUseCase {
+        return GetCategoryUseCase(repository)
     }
 }

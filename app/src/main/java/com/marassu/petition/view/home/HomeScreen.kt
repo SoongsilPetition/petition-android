@@ -19,6 +19,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marassu.entity.petition.Petition
 import com.marassu.petition.view.atom.TitleTopBar
+import com.marassu.petition.view.petition_list.PetitionList
 import com.marassu.petition.view.petition_list.PetitionListItem
 import timber.log.Timber
 
@@ -27,6 +28,7 @@ fun HomeScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.White)
     ) {
         val viewModel: HomeViewModel = hiltViewModel()
         Scaffold(topBar = {
@@ -39,30 +41,6 @@ fun HomeScreen() {
                     .background(Color.White)
             ) {
                 PetitionList(petitions = viewModel.getPetition().collectAsLazyPagingItems())
-            }
-        }
-    }
-}
-@Composable
-fun PetitionList(petitions: LazyPagingItems<Petition>,
-                 modifier: Modifier = Modifier) {
-    when(petitions.loadState.refresh) {
-        is LoadState.Error -> {
-            Timber.e("error")
-        }
-        else -> {
-            LazyColumn(modifier = modifier,
-                contentPadding = PaddingValues(bottom = 44.dp)) {
-                items(count = petitions.itemCount) {index ->
-                    Timber.d("index : $index")
-                    val item = petitions[index]
-                    if (item != null) {
-                        PetitionListItem(petition = item) {
-                            Timber.d("clicked")
-                        }
-                        Divider(color = Color.LightGray, thickness = 1.dp)
-                    }
-                }
             }
         }
     }

@@ -3,9 +3,9 @@ package com.marassu.entity.petition
 import com.google.gson.annotations.SerializedName
 
 data class PetitionCategory(
-    @SerializedName("petitionCategoryId")
+    @SerializedName("petitionCategoryId", alternate = ["id"])
     val id: String,
 
-    @SerializedName("petitionCategoryName")
+    @SerializedName("petitionCategoryName", alternate = ["categoryName"])
     val categoryName: String
 )

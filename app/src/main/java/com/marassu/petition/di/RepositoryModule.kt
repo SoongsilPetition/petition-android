@@ -1,9 +1,11 @@
 package com.marassu.petition.di
 
+import com.marassu.data.repositoryImpl.CategoryRepositoryImpl
 import com.marassu.data.repositoryImpl.ConcurRepositoryImpl
 import com.marassu.data.repositoryImpl.PetitionAnswerRepositoryImpl
 import com.marassu.data.repositoryImpl.PetitionRepositoryImpl
 import com.marassu.data.repositoryImpl.UserRepositoryImpl
+import com.marassu.domain.repository.CategoryRepository
 import com.marassu.domain.repository.ConcurRepository
 import com.marassu.domain.repository.PetitionAnswerRepository
 import com.marassu.domain.repository.PetitionRepository
@@ -38,6 +40,12 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun providePetitionAnswerRepository(repository: PetitionAnswerRepositoryImpl): PetitionAnswerRepository {
+        return repository
+    }
+
+    @Singleton
+    @Provides
+    fun provideCategoryRepository(repository: CategoryRepositoryImpl): CategoryRepository {
         return repository
     }
 }
