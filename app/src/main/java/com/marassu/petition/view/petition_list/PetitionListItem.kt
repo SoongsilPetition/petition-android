@@ -6,11 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +37,7 @@ fun PetitionListItem(petition: Petition, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .clickable(onClick = onClick)
+            .background(Color.White)
             .padding(top = 16.dp, bottom = 20.dp, start = 24.dp, end = 24.dp)
             .fillMaxWidth()
     ) {
@@ -49,6 +48,16 @@ fun PetitionListItem(petition: Petition, onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            if(petition.categoryList.isNotEmpty()) {
+                Text(
+                    text = petition.categoryList[0].categoryName, color = TextSub, style = TextStyle(
+                        fontFamily = notosanskr,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 8.sp,
+                        platformStyle = PlatformTextStyle(includeFontPadding = false)
+                    )
+                )
+            }
             Text(
                 text = "D-1",
                 color = TextMain,
