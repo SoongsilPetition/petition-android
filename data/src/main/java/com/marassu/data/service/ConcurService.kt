@@ -15,7 +15,7 @@ interface ConcurService {
         @Query("petitionId") petitionId: Long,
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 10
-    ): Response<ArrayList<Concur>>
+    ): Response<List<Concur>>
 
     @POST("/concur")
     suspend fun postConcur(@Body concurRequest: ConcurRequest): Response<Concur>

@@ -1,5 +1,6 @@
 package com.marassu.petition.feature.category_petition_list
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marassu.petition.base.BaseActivity
+import com.marassu.petition.feature.petition_detail.PetitionDetailActivity
 import com.marassu.petition.view.atom.TopBar
 import com.marassu.petition.view.petition_list.PetitionList
 import com.marassu.petition.view.theme.TextMain
@@ -59,7 +61,9 @@ class CategoryPetitionListActivity : BaseActivity() {
                         petitions = viewModel.changeSetting(category).collectAsLazyPagingItems(),
                         isBottomPaddingEnabled = false,
                         onClick = {petition ->
-
+                            val detailIntent: Intent = Intent(this, PetitionDetailActivity::class.java)
+                            detailIntent.putExtra(PetitionDetailActivity.PETITON_ID, petition.id)
+                            startActivity(detailIntent)
                         }
                     )
                 } else {
@@ -67,7 +71,9 @@ class CategoryPetitionListActivity : BaseActivity() {
                         petitions = viewModel.getPetition(category).collectAsLazyPagingItems(),
                         isBottomPaddingEnabled = false,
                         onClick = { petition ->
-
+                            val detailIntent: Intent = Intent(this, PetitionDetailActivity::class.java)
+                            detailIntent.putExtra(PetitionDetailActivity.PETITON_ID, petition.id)
+                            startActivity(detailIntent)
                         }
                     )
                 }

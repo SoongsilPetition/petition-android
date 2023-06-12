@@ -98,7 +98,7 @@ class PetitionDetailActivity : BaseActivity() {
 
         viewModel.loadPetition(petitionId = petitionId)
         if (updateFlag.value == 1) {
-            val concurs = viewModel.getConcur().collectAsLazyPagingItems()
+            viewModel.getConcur()
             Scaffold(topBar = {
                 TopBar(isBack = true, onLeftClick = {})
             }) { paddingValues ->
@@ -123,18 +123,8 @@ class PetitionDetailActivity : BaseActivity() {
                                         })
                                 }
                             }
-                            if (updateConcurFlag.value == 1) {
-                                when (concurs.loadState.refresh) {
-                                    is LoadState.Error -> {
-                                        Timber.e("error")
-                                    }
-
-                                    else -> {
-                                        items(count = concurs.itemCount) {
-                                            concurs[it]?.let { it1 -> ConcurItem(concur = it1) }
-                                        }
-                                    }
-                                }
+                            items(viewModel.concurList) {
+                                ConcurItem(concur = it)
                             }
                         }
                     }
