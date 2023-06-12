@@ -1,4 +1,4 @@
-package com.marassu.petition.view.completion
+package com.marassu.petition.feature.completion
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -71,7 +71,7 @@ fun TopBar(
         )
         if (isBack) {
             Text(
-                modifier = Modifier.clickable(onClick = onLeftClick),
+                modifier = Modifier.clickable(onClick = {}),
                 text = "       ", color = TextSub, style = TextStyle(
                     fontFamily = notosanskr,
                     fontWeight = FontWeight.Light,
@@ -81,7 +81,7 @@ fun TopBar(
             )
         } else {
             Text(
-                modifier = Modifier.clickable(onClick = onLeftClick),
+                modifier = Modifier.clickable(onClick = onRightClick),
                 text = "완료", color = TextSub, style = TextStyle(
                     fontFamily = notosanskr,
                     fontWeight = FontWeight.Light,

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Petition</string>
     <string name="title_activity_petition_list_item">PetitionListItem</string>
+    <string name="title_activity_write">WriteActivity</string>
 </resources>

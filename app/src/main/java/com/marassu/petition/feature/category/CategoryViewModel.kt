@@ -1,4 +1,4 @@
-package com.marassu.petition.view.category
+package com.marassu.petition.feature.category
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateListOf

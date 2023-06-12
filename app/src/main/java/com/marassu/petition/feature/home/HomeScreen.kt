@@ -1,4 +1,4 @@
-package com.marassu.petition.view.home
+package com.marassu.petition.feature.home
 
 import android.content.Intent
 import androidx.compose.foundation.background
@@ -21,6 +21,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marassu.entity.petition.Petition
 import com.marassu.petition.feature.petition_detail.PetitionDetailActivity
+import com.marassu.petition.feature.write.WriteActivity
 import com.marassu.petition.view.atom.TitleTopBar
 import com.marassu.petition.view.petition_list.PetitionList
 import com.marassu.petition.view.petition_list.PetitionListItem
@@ -28,15 +29,26 @@ import timber.log.Timber
 
 @Composable
 fun HomeScreen() {
+
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
         val viewModel: HomeViewModel = hiltViewModel()
-        val context = LocalContext.current
         Scaffold(topBar = {
-            TitleTopBar(subTitle = "숭실대학교", title = "마라슈", isSearch = true, onSearchClick = {})
+            TitleTopBar(
+                subTitle = "숭실대학교",
+                title = "마라슈",
+                isSearch = true,
+                isWrite = true,
+                onSearchClick = {},
+                onWriteClick = {
+                    val intent = Intent(context, WriteActivity::class.java)
+                    context.startActivity(intent)
+                })
         }) { paddingValues ->
             Surface(
                 modifier = Modifier

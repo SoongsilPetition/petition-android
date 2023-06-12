@@ -1,4 +1,4 @@
-package com.marassu.petition.view.completion
+package com.marassu.petition.feature.completion
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

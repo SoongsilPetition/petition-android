@@ -1,4 +1,4 @@
-package com.marassu.petition.view.category
+package com.marassu.petition.feature.category
 
 import android.content.Intent
 import androidx.compose.foundation.background
