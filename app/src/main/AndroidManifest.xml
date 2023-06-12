@@ -16,14 +16,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".feature.write.WriteActivity"
+            android:exported="false"
+            android:label="@string/title_activity_write"
+            android:theme="@style/Theme.PetitionAndroid" />
+        <activity
             android:name=".feature.category_petition_list.CategoryPetitionListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.PetitionAndroid">
-        </activity>
-        <activity android:name=".feature.auth.AuthActivity"
+            android:theme="@style/Theme.PetitionAndroid"></activity>
+        <activity
+            android:name=".feature.auth.AuthActivity"
             android:exported="true"
             android:theme="@style/Theme.PetitionAndroid">
             <intent-filter>
@@ -33,4 +38,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

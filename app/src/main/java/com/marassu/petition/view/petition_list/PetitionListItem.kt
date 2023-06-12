@@ -138,7 +138,7 @@ fun PetitionListItem(petition: Petition, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PetitionListItemPreview() {
-    val categoryTest = PetitionCategory("-1", "시설")
+    val categoryTest = PetitionCategory("시설")
     val userTest = User("1", "안녕", "test@gmail.com", "", "")
     val petitionTest = Petition(
         id = "-1",
