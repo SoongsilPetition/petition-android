@@ -21,7 +21,6 @@ class PetitionPageSource(
         return try {
             val response =
                 service.getPetitionList(page = pageIndex, sort = sort, category = category).body()
-            val petitions = response
             val nextKey =
                 if (response?.isEmpty() == true) {
                     null

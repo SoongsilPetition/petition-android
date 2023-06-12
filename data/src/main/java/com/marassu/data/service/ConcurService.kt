@@ -12,8 +12,7 @@ import retrofit2.http.Query
 interface ConcurService {
     @GET("/concur")
     suspend fun getConcurList(
-        @Query("petitionId") petitionId: Int,
-        @Query("agreementStatus") agreementStatus: AgreementStatus = AgreementStatus.AGREE,
+        @Query("petitionId") petitionId: Long,
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 10
     ): Response<ArrayList<Concur>>

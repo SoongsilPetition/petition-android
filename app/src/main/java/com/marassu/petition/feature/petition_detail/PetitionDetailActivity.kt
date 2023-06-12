@@ -23,7 +23,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -33,6 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +52,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.marassu.entity.concur.AgreementStatus
 import com.marassu.entity.concur.Concur
 import com.marassu.entity.petition.Petition
@@ -66,71 +70,70 @@ import com.marassu.petition.view.theme.TextMain
 import com.marassu.petition.view.theme.TextNickName
 import com.marassu.petition.view.theme.TextSub
 import com.marassu.petition.view.theme.notosanskr
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.count
+import timber.log.Timber
+import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class PetitionDetailActivity : BaseActivity() {
+    var petitionId by Delegates.notNull<Long>()
+
+    companion object {
+        const val PETITON_ID = "PETITION_ID"
+    }
+
     @Composable
     override fun Content() {
-        PreviewDetail()
+        petitionId = intent.extras?.getLong(PetitionDetailActivity.PETITON_ID, -1) ?: -1
+        Detail()
     }
-}
 
-@Composable
-@Preview(showSystemUi = true)
-fun PreviewDetail() {
-    val categoryTest1 = PetitionCategory("-1", "시설")
-    val categoryTest2 = PetitionCategory("0", "졸업")
-    val userTest = User("1", "안녕", "test@gmail.com", "", "")
-    val petitionTest = Petition(
-        id = "-1",
-        title = "이것은 제목입니다.",
-        content = "임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용",
-        imageUrl = "",
-        categoryList = arrayListOf(categoryTest1, categoryTest2),
-        agreement = 60,
-        disagreement = 10,
-        user = userTest,
-        createdAt = "2023-06-08",
-        updatedAt = "",
-        dueDate = "2023-06-11"
-    )
-    Detail(petition = petitionTest) { _ -> }
-}
+    @SuppressLint("SimpleDateFormat")
+    @Composable
+    fun Detail() {
+        val viewModel: PetitionDetailViewModel = hiltViewModel()
+        val updateFlag = viewModel.updatePetitionFlag.collectAsState()
+        val updateConcurFlag = viewModel.updateConcurFlag.collectAsState()
 
-@SuppressLint("SimpleDateFormat")
-@Composable
-fun Detail(petition: Petition, onToggleClick: (index: Int) -> Unit) {
-    val userTest = User("1", "안녕", "test@gmail.com", "", "")
-    val concur1 = Concur(1, "동의합니다",  AgreementStatus.AGREE, userTest)
-    val concur2 = Concur(2, "비동의합니다.", AgreementStatus.DISAGREE, userTest)
-    val concur3 = Concur(1, "동의합니다",  AgreementStatus.AGREE, userTest)
-    val concur4 = Concur(2, "비동의합니다.", AgreementStatus.DISAGREE, userTest)
-    val concur5 = Concur(1, "동의합니다",  AgreementStatus.AGREE, userTest)
-    val concur6 = Concur(2, "비동의합니다.", AgreementStatus.DISAGREE, userTest)
-    val concur7 = Concur(1, "동의합니다",  AgreementStatus.AGREE, userTest)
-    val concur8 = Concur(2, "비동의합니다.", AgreementStatus.DISAGREE, userTest)
-    val concurList = listOf(concur1, concur2, concur3, concur4, concur5, concur6, concur7, concur8)
+        viewModel.loadPetition(petitionId = petitionId)
+        if (updateFlag.value == 1) {
+            val concurs = viewModel.getConcur().collectAsLazyPagingItems()
+            Scaffold(topBar = {
+                TopBar(isBack = true, onLeftClick = {})
+            }) { paddingValues ->
+                Surface(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(paddingValues)
+                        .background(Color.White)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ) {
+                        LazyColumn {
+                            item {
+                                viewModel.petition?.let {
+                                    PetitionBody(
+                                        petition = it,
+                                        onToggleClick = { viewModel.updateAgreement(it) })
+                                }
+                            }
+                            if (updateConcurFlag.value == 1) {
+                                when (concurs.loadState.refresh) {
+                                    is LoadState.Error -> {
+                                        Timber.e("error")
+                                    }
 
-    Scaffold(topBar = {
-        TopBar(isBack = true, onLeftClick = {})
-    }) { paddingValues ->
-        Surface(
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(paddingValues)
-                .background(Color.White)
-        ) {
-            val scrollState = rememberScrollState()
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                LazyColumn() {
-                    item {
-                        DetailBody(petition = petition, onToggleClick = onToggleClick)
-                    }
-
-                    items(concurList) {
-                        ConcurItem(concur = it)
+                                    else -> {
+                                        items(count = concurs.itemCount) {
+                                            concurs[it]?.let { it1 -> ConcurItem(concur = it1) }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -139,7 +142,7 @@ fun Detail(petition: Petition, onToggleClick: (index: Int) -> Unit) {
 }
 
 @Composable
-fun DetailBody(petition: Petition, onToggleClick: (index: Int) -> Unit) {
+fun PetitionBody(petition: Petition, onToggleClick: (index: Int) -> Unit) {
     Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
         val defaultConcur = remember { mutableStateOf("동의합니다") }
         val concur by defaultConcur

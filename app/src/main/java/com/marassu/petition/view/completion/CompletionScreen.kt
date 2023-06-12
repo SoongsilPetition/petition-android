@@ -31,7 +31,10 @@ fun CompletionScreen() {
                     .fillMaxSize()
                     .background(Color.White)
             ) {
-                PetitionList(petitions = viewModel.getPetition().collectAsLazyPagingItems())
+                PetitionList(petitions = viewModel.getPetition().collectAsLazyPagingItems(),
+                    onClick = { petition ->
+
+                    })
             }
         }
     }

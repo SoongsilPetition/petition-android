@@ -15,7 +15,8 @@ import timber.log.Timber
 @Composable
 fun PetitionList(petitions: LazyPagingItems<Petition>,
                  modifier: Modifier = Modifier,
-                 isBottomPaddingEnabled: Boolean = true
+                 isBottomPaddingEnabled: Boolean = true,
+                 onClick: (petition: Petition) -> Unit
 ) {
     when(petitions.loadState.refresh) {
         is LoadState.Error -> {
@@ -36,6 +37,7 @@ fun PetitionList(petitions: LazyPagingItems<Petition>,
                     if (item != null) {
                         PetitionListItem(petition = item) {
                             Timber.d("clicked")
+                            onClick(item)
                         }
                         Divider(color = Color.LightGray, thickness = 1.dp)
                     }

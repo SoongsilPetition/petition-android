@@ -23,6 +23,8 @@
             android:exported="true"
             android:theme="@style/Theme.PetitionAndroid">
         </activity>
+        <activity android:name=".feature.petition_detail.PetitionDetailActivity"
+            android:exported="false"/>
         <activity android:name=".feature.auth.AuthActivity"
             android:exported="true"
             android:theme="@style/Theme.PetitionAndroid">

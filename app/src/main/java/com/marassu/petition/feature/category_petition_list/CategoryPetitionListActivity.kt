@@ -48,7 +48,6 @@ class CategoryPetitionListActivity : BaseActivity() {
         val myText by text
         val category = intent.getStringExtra(CATEGORY_NAME) ?: ""
         val flag = viewModel.refreshEvent.collectAsState()
-        val myflag by flag
         Scaffold(topBar = {
             CategoryPetitionTopBar(text = myText, onClick = {
                 viewModel.update()
@@ -58,12 +57,18 @@ class CategoryPetitionListActivity : BaseActivity() {
                 if(flag.value > 0) {
                     PetitionList(
                         petitions = viewModel.changeSetting(category).collectAsLazyPagingItems(),
-                        isBottomPaddingEnabled = false
+                        isBottomPaddingEnabled = false,
+                        onClick = {petition ->
+
+                        }
                     )
                 } else {
                     PetitionList(
                         petitions = viewModel.getPetition(category).collectAsLazyPagingItems(),
-                        isBottomPaddingEnabled = false
+                        isBottomPaddingEnabled = false,
+                        onClick = { petition ->
+
+                        }
                     )
                 }
             }

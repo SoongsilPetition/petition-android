@@ -1,5 +1,6 @@
 package com.marassu.data.repositoryImpl
 
+import androidx.paging.PagingData
 import com.marassu.data.source.ConcurRemoteDataSource
 import com.marassu.data.util.CommonAPILogic
 import com.marassu.domain.repository.ConcurRepository
@@ -12,13 +13,12 @@ import javax.inject.Inject
 class ConcurRepositoryImpl @Inject constructor(
     private val concurRemoteDataSource: ConcurRemoteDataSource
 ): ConcurRepository {
-    override suspend fun getConcurList(
-        petitionId: Int,
-        agreementStatus: AgreementStatus,
+    override fun getConcurList(
+        petitionId: Long,
         page: Int,
         size: Int
-    ): Flow<ArrayList<Concur>> {
-        return CommonAPILogic.checkError(concurRemoteDataSource.getConcurList(petitionId, agreementStatus, page, size))
+    ): Flow<PagingData<Concur>> {
+        return concurRemoteDataSource.getConcurList(petitionId, page, size)
     }
 
     override suspend fun postConcur(concurRequest: ConcurRequest): Flow<Concur> {
