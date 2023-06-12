@@ -1,4 +1,4 @@
-package com.marassu.petition.view.info
+package com.marassu.petition.feature.info
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
