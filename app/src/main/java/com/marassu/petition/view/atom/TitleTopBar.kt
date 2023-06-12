@@ -5,9 +5,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +34,9 @@ fun TitleTopBar(
     subTitle: String = "",
     title: String = "",
     isSearch: Boolean = false,
-    onSearchClick: () -> Unit = {}
+    isWrite: Boolean = false,
+    onSearchClick: () -> Unit = {},
+    onWriteClick: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier
@@ -60,15 +64,28 @@ fun TitleTopBar(
                 )
             )
         }
-        if (isSearch) {
-            Icon(
-                modifier = Modifier
-                    .size(16.dp)
-                    .clickable(onClick = onSearchClick),
-                imageVector = ImageVector.vectorResource(id = R.drawable.search),
-                contentDescription = null,
-                tint = Selected
-            )
+        Row() {
+            if (isWrite) {
+                Icon(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clickable(onClick = onWriteClick),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.plus),
+                    contentDescription = null,
+                    tint = Selected
+                )
+                Spacer(modifier = Modifier.width(24.dp))
+            }
+            if (isSearch) {
+                Icon(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clickable(onClick = onSearchClick),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.search),
+                    contentDescription = null,
+                    tint = Selected
+                )
+            }
         }
     }
 }
@@ -77,7 +94,12 @@ fun TitleTopBar(
 @Preview(showBackground = true)
 @Composable
 fun TitleTopBarSearchPreview() {
-    TitleTopBar(subTitle = "숭실대학교", title = "마라슈", isSearch = true, onSearchClick = {})
+    TitleTopBar(
+        subTitle = "숭실대학교",
+        title = "마라슈",
+        isWrite = true,
+        isSearch = true,
+        onSearchClick = {})
 }
 
 @Preview(showBackground = true)
