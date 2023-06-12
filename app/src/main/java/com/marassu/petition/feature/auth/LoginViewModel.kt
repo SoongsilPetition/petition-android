@@ -1,11 +1,11 @@
-package com.marassu.petition.feature.login
+package com.marassu.petition.feature.auth
 
 import android.app.Application
 import android.content.SharedPreferences
+import androidx.compose.runtime.collectAsState
 import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.marassu.data.source.UserRemoteDataSource
 import com.marassu.data.util.HttpException
 import com.marassu.domain.usecase.PostUserLoginUseCase
 import com.marassu.entity.user.UserLoginRequest
@@ -41,9 +41,14 @@ class LoginViewModel @Inject constructor(
 
     fun login() {
         viewModelScope.launch {
-            postUserLoginUseCase.postUserLogin(UserLoginRequest(_email.value, _password.value))
+            postUserLoginUseCase.postUserLogin(
+                UserLoginRequest(
+                    "${email.value}@soongsil.ac.kr",
+                    password.value
+                )
+            )
                 .catch {
-                    if(it is HttpException) {
+                    if (it is HttpException) {
                         Timber.e("code : ${it.code}, message: ${it.message}")
                     }
                 }
