@@ -58,16 +58,16 @@ fun PetitionListItem(petition: Petition, onClick: () -> Unit) {
                     )
                 )
             }
-            Text(
-                text = "D-1",
-                color = TextMain,
-                style = TextStyle(
-                    fontFamily = notosanskr,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
-                    platformStyle = PlatformTextStyle(includeFontPadding = false)
-                )
-            )
+//            Text(
+//                text = "D-1",
+//                color = TextMain,
+//                style = TextStyle(
+//                    fontFamily = notosanskr,
+//                    fontWeight = FontWeight.Medium,
+//                    fontSize = 16.sp,
+//                    platformStyle = PlatformTextStyle(includeFontPadding = false)
+//                )
+//            )
         }
         Text(
             modifier = Modifier.padding(bottom = 16.dp),

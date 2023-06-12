@@ -100,7 +100,7 @@ class PetitionDetailActivity : BaseActivity() {
         if (updateFlag.value == 1) {
             viewModel.getConcur()
             Scaffold(topBar = {
-                TopBar(isBack = true, onLeftClick = {})
+                TopBar(isBack = true, onLeftClick = { finish() })
             }) { paddingValues ->
                 Surface(
                     modifier = Modifier

@@ -91,7 +91,7 @@ fun previewCategoryPetitionListTopBar() {
 @Composable
 fun CategoryPetitionTopBar(onClick: () -> Unit, text: String) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        TopBar(title = "청원 : 졸업", isBack = true, onLeftClick = { })
+        TopBar(title = "청원 : 졸업", isBack = true, onLeftClick = {  })
         Row(
             modifier = Modifier
                 .fillMaxWidth()
