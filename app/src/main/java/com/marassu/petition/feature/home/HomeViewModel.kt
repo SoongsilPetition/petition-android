@@ -1,4 +1,4 @@
-package com.marassu.petition.view.home
+package com.marassu.petition.feature.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

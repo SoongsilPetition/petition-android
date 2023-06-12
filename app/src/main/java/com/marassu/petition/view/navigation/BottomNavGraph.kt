@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.marassu.petition.view.category.CategoryScreen
-import com.marassu.petition.view.completion.CompletionScreen
-import com.marassu.petition.view.home.HomeScreen
-import com.marassu.petition.view.info.InfoScreen
+import com.marassu.petition.feature.category.CategoryScreen
+import com.marassu.petition.feature.completion.CompletionScreen
+import com.marassu.petition.feature.home.HomeScreen
+import com.marassu.petition.feature.info.InfoScreen
 
 @Composable
 fun SetUpBottomNavGraph(
