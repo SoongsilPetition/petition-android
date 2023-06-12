@@ -34,24 +34,20 @@ object HttpClientModule {
     }
 
     @Provides
-    @Singleton
     @ForAccessToken
     fun provideAccessTokenHttpClient(sharedPreferences: SharedPreferences): OkHttpClient {
         val builder = OkHttpClient.Builder()
         val accessToken = sharedPreferences.getString(SharedPreferenceModule.ACCESS_TOKEN, "")
         builder.addInterceptor(Interceptor { chain ->
             var request = chain.request()
-            if (!accessToken.isNullOrEmpty()) {
-                request = request.newBuilder()
-                    .addHeader(AUTHORIZATION, accessToken)
-                    .build()
-            }
-            chain.proceed(request)
+            chain.proceed(request.newBuilder().apply {
+                addHeader("Authorization", accessToken?:"")
+            }.build())
         })
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
             builder.addInterceptor(loggingInterceptor)
         }
         return builder.build()

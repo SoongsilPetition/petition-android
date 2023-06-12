@@ -117,7 +117,10 @@ class PetitionDetailActivity : BaseActivity() {
                                 viewModel.petition?.let {
                                     PetitionBody(
                                         petition = it,
-                                        onToggleClick = { viewModel.updateAgreement(it) })
+                                        onToggleClick = { toggle -> viewModel.updateAgreement(toggle) },
+                                        onClick = { content ->
+                                            viewModel.postConcur(content)
+                                        })
                                 }
                             }
                             if (updateConcurFlag.value == 1) {
@@ -142,7 +145,11 @@ class PetitionDetailActivity : BaseActivity() {
 }
 
 @Composable
-fun PetitionBody(petition: Petition, onToggleClick: (index: Int) -> Unit) {
+fun PetitionBody(
+    petition: Petition,
+    onToggleClick: (index: Int) -> Unit,
+    onClick: (String) -> Unit
+) {
     Column(modifier = Modifier.padding(start = 24.dp, end = 24.dp)) {
         val defaultConcur = remember { mutableStateOf("동의합니다") }
         val concur by defaultConcur
@@ -235,15 +242,6 @@ fun PetitionBody(petition: Petition, onToggleClick: (index: Int) -> Unit) {
             )
         }
 
-        //TODO Image 사이즈 반영
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 12.dp, bottom = 12.dp)
-        ) {
-
-        }
-
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -305,7 +303,7 @@ fun PetitionBody(petition: Petition, onToggleClick: (index: Int) -> Unit) {
                         if (selectedIndex == 0) {
                             defaultConcur.value = "동의합니다."
                         } else {
-                            defaultConcur.value = "비동이합니다."
+                            defaultConcur.value = "비동의합니다."
                         }
                         onToggleClick(index)
                     },
@@ -390,12 +388,17 @@ fun PetitionBody(petition: Petition, onToggleClick: (index: Int) -> Unit) {
                 ),
                 onValueChange = {
                     content.value = it
-//                            onValueChange(it)
                 },
-                label = { Text(text = concur) }
+                placeholder = { Text(text = concur) }
             )
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    if (content.value.isEmpty()) {
+                        onClick(defaultConcur.value)
+                    } else {
+                        onClick(content.value)
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(AgreeGray),
                 modifier = Modifier
                     .border(

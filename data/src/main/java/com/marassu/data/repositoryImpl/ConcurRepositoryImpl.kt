@@ -4,7 +4,6 @@ import androidx.paging.PagingData
 import com.marassu.data.source.ConcurRemoteDataSource
 import com.marassu.data.util.CommonAPILogic
 import com.marassu.domain.repository.ConcurRepository
-import com.marassu.entity.concur.AgreementStatus
 import com.marassu.entity.concur.Concur
 import com.marassu.entity.concur.ConcurRequest
 import kotlinx.coroutines.flow.Flow

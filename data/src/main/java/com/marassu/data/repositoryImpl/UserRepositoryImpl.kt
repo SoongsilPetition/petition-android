@@ -5,11 +5,10 @@ import com.marassu.data.util.CommonAPILogic
 import com.marassu.domain.repository.UserRepository
 import com.marassu.entity.user.User
 import com.marassu.entity.user.UserLoginRequest
+import com.marassu.entity.user.UserLoginResponse
 import com.marassu.entity.user.UserRegisterRequest
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
-import java.io.IOException
 
 class UserRepositoryImpl @Inject constructor(
     private val userRemoteDataSource: UserRemoteDataSource
@@ -18,8 +17,9 @@ class UserRepositoryImpl @Inject constructor(
         return CommonAPILogic.checkError( userRemoteDataSource.postUserRegister(userRegisterRequest))
     }
 
-    override suspend fun postUserLogin(userLoginRequest: UserLoginRequest): Flow<String> {
+    override suspend fun postUserLogin(userLoginRequest: UserLoginRequest): Flow<UserLoginResponse> {
         return CommonAPILogic.checkError(userRemoteDataSource.postUserLogin(userLoginRequest))
     }
+
 
 }

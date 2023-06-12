@@ -9,6 +9,7 @@ import com.marassu.domain.usecase.GetPetitionUseCase
 import com.marassu.domain.usecase.PostConcurUseCase
 import com.marassu.entity.concur.AgreementStatus
 import com.marassu.entity.concur.Concur
+import com.marassu.entity.concur.ConcurRequest
 import com.marassu.entity.petition.Petition
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -20,19 +21,21 @@ import javax.inject.Inject
 @HiltViewModel
 class PetitionDetailViewModel @Inject constructor(
     application: Application,
-    val getPetitionUseCase: GetPetitionUseCase,
-    val getConcurListUseCase: GetConcurListUseCase,
-    val postConcurUseCase: PostConcurUseCase
-): AndroidViewModel(application) {
-    private var agreementStatus = AgreementStatus.AGREE
+    private val getPetitionUseCase: GetPetitionUseCase,
+    private val getConcurListUseCase: GetConcurListUseCase,
+    private val postConcurUseCase: PostConcurUseCase
+) : AndroidViewModel(application) {
     val updatePetitionFlag: MutableStateFlow<Int> = MutableStateFlow(0)
     val updateConcurFlag: MutableStateFlow<Int> = MutableStateFlow(-1)
     var petition: Petition? = null
-
-    val concurList: List<Concur> = listOf()
+    var agreementStatus: AgreementStatus = AgreementStatus.AGREE
 
     fun updateAgreement(toggle: Int) {
-        updateConcurFlag.value = toggle
+        if (toggle == 0) {
+            agreementStatus = AgreementStatus.AGREE
+        } else {
+            agreementStatus = AgreementStatus.DISAGREE
+        }
     }
 
     fun loadPetition(petitionId: Long) {
@@ -45,9 +48,23 @@ class PetitionDetailViewModel @Inject constructor(
         }
     }
 
-    fun getConcur(): Flow<PagingData<Concur>> {
-            return getConcurListUseCase.getConcurList(petitionId = petition?.id ?: -1).apply {
-                updateConcurFlag.value = 1
+    fun postConcur(text: String) {
+        viewModelScope.launch {
+            postConcurUseCase.postConcur(
+                ConcurRequest(
+                    content = text,
+                    petitionId = petition?.id ?: -1,
+                    agreementStatus = agreementStatus
+                )
+            ).collect {concur ->
+                updateConcurFlag.value = 0
             }
+        }
+    }
+
+    fun getConcur(): Flow<PagingData<Concur>> {
+        return getConcurListUseCase.getConcurList(petitionId = petition?.id ?: -1).apply {
+            updateConcurFlag.value = 1
+        }
     }
 }
