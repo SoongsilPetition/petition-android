@@ -10,5 +10,5 @@ data class PetitionRequest(
     val content: String,
 
     @SerializedName("category")
-    val petitionCategory: PetitionCategory
+    val petitionCategory: List<PetitionCategory>
 )
