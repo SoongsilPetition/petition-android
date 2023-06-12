@@ -2,6 +2,7 @@ package com.marassu.petition.feature.write
 
 import android.app.Application
 import android.content.SharedPreferences
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.marassu.data.util.HttpException
@@ -9,7 +10,9 @@ import com.marassu.domain.usecase.PostPetitionUseCase
 import com.marassu.entity.petition.PetitionCategory
 import com.marassu.entity.petition.PetitionRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -21,6 +24,15 @@ class WriteViewModel @Inject constructor(
     private val postPetitionUseCase: PostPetitionUseCase,
     application: Application
 ) : AndroidViewModel(application) {
+
+    private val _toastMessage = MutableSharedFlow<String>()
+    val toastMessage = _toastMessage.asSharedFlow()
+
+    fun sendMessage(message: String) {
+        viewModelScope.launch {
+            _toastMessage.emit(message)
+        }
+    }
 
     private val _title = MutableStateFlow("")
     val title = _title.asStateFlow()
@@ -55,6 +67,10 @@ class WriteViewModel @Inject constructor(
                 .catch {
                     if (it is HttpException) {
                         Timber.e("code : ${it.code}, message: ${it.message}")
+                        when(it.code) {
+                            400 -> sendMessage("뻘글입니다.")
+                            422 -> sendMessage("혐오글입니다.")
+                        }
                     }
                 }
                 .collect {

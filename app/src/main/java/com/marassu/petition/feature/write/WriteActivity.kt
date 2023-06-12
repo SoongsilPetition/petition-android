@@ -1,5 +1,6 @@
 package com.marassu.petition.feature.write
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,7 +37,15 @@ class WriteActivity : BaseActivity() {
     @Composable
     override fun Content() {
         val viewModel: WriteViewModel = hiltViewModel()
-
+        LaunchedEffect(Unit) {
+            viewModel.toastMessage.collect { message ->
+                Toast.makeText(
+                    this@WriteActivity,
+                    message,
+                    Toast.LENGTH_SHORT,
+                ).show()
+            }
+        }
         PetitionTheme {
             Column(
                 modifier = Modifier
