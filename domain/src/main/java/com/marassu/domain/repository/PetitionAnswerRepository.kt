@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface PetitionAnswerRepository {
     suspend fun postPetitionAnswer(petitionAnswerRequest: PetitionAnswerRequest): Flow<PetitionAnswer>
 
-    suspend fun getPetitionAnswer(petitionId: Int): Flow<PetitionAnswer>
+    suspend fun getPetitionAnswer(petitionId: Long): Flow<PetitionAnswer>
 
     suspend fun deletePetitionAnswer(petitionId: Int): Flow<Unit>
 

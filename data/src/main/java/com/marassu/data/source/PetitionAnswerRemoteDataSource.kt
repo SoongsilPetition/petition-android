@@ -15,7 +15,7 @@ class PetitionAnswerRemoteDataSource(
     suspend fun postPetitionAnswer(petitionAnswerRequest: PetitionAnswerRequest) =
         tokenPetitionAnswerService.postPetitionAnswer(petitionAnswerRequest)
 
-    suspend fun getPetitionAnswer(petitionId: Int) =
+    suspend fun getPetitionAnswer(petitionId: Long) =
         publicPetitionAnswerService.getPetitionAnswer(petitionId)
 
     suspend fun deletePetitionAnswer(petitionId: Int) =

@@ -73,6 +73,7 @@ import com.marassu.petition.view.theme.notosanskr
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.count
 import timber.log.Timber
+import java.util.Date
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
@@ -94,7 +95,6 @@ class PetitionDetailActivity : BaseActivity() {
     fun Detail() {
         val viewModel: PetitionDetailViewModel = hiltViewModel()
         val updateFlag = viewModel.updatePetitionFlag.collectAsState()
-        val updateConcurFlag = viewModel.updateConcurFlag.collectAsState()
 
         viewModel.loadPetition(petitionId = petitionId)
         if (updateFlag.value == 1) {
@@ -193,7 +193,6 @@ fun PetitionBody(
                 .fillMaxWidth()
                 .padding(top = 24.dp, bottom = 12.dp)
         ) {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             Text(
                 text = petition.user.name,
                 color = Color.Black,
@@ -205,8 +204,7 @@ fun PetitionBody(
             )
             Spacer(Modifier.weight(1f))
             Text(
-                //TODO 시스템에서 불러온 날짜 적용하기
-                text = "2023/04/01 - 2023/06/10",
+                text = "${petition.createdAt} - ${petition.dueDate}",
                 color = TextSub,
                 style = TextStyle(
                     fontFamily = notosanskr,

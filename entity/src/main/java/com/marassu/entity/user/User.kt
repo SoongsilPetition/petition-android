@@ -1,6 +1,7 @@
 package com.marassu.entity.user
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User(
     @SerializedName("userId")
@@ -17,4 +18,4 @@ data class User(
 
     @SerializedName("updatedAt")
     val updatedAt: String
-)
+): Serializable
