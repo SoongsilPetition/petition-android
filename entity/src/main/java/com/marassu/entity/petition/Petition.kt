@@ -5,7 +5,7 @@ import com.marassu.entity.user.User
 
 data class Petition(
     @SerializedName("petitionId")
-    val id: String,
+    val id: Long,
 
     @SerializedName("petitionTitle")
     val title: String,
@@ -25,12 +25,15 @@ data class Petition(
     @SerializedName("petitionDisagreement")
     val disagreement: Long,
 
-    @SerializedName("com/marassu/entity/user")
+    @SerializedName("user")
     val user: User,
 
     @SerializedName("createdAt")
     val createdAt: String,
 
     @SerializedName("updatedAt")
-    val updatedAt: String
+    val updatedAt: String,
+
+    @SerializedName("petitionDueDate")
+    val dueDate: String
 )

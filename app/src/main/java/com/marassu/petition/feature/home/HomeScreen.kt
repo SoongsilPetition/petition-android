@@ -20,6 +20,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marassu.entity.petition.Petition
+import com.marassu.petition.feature.petition_detail.PetitionDetailActivity
 import com.marassu.petition.feature.write.WriteActivity
 import com.marassu.petition.view.atom.TitleTopBar
 import com.marassu.petition.view.petition_list.PetitionList
@@ -55,7 +56,12 @@ fun HomeScreen() {
                     .fillMaxSize()
                     .background(Color.White)
             ) {
-                PetitionList(petitions = viewModel.getPetition().collectAsLazyPagingItems())
+                PetitionList(petitions = viewModel.getPetition().collectAsLazyPagingItems(),
+                onClick = {petition ->
+                    val detailIntent: Intent = Intent(context, PetitionDetailActivity::class.java)
+                    detailIntent.putExtra(PetitionDetailActivity.PETITON_ID, petition.id.toLong())
+                    context.startActivity(detailIntent)
+                })
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.marassu.petition.feature.category_petition_list
 
 import android.app.Application
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -23,6 +25,12 @@ class CategoryPetitionListViewModel @Inject constructor(
         private val AGREE_COUNT = "동의 많은 순"
     }
     val buttonText = MutableStateFlow(CREATED_AT)
+
+    val refreshEvent = MutableStateFlow(0)
+
+    fun update() {
+        refreshEvent.value = if(refreshEvent.value == 0) 1 else 0
+    }
     fun getPetition(categoryName: String): Flow<PagingData<Petition>> =
         getPetitionListUseCase.getPetitionList(category = categoryName)
 

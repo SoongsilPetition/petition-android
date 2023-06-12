@@ -18,7 +18,6 @@ import javax.inject.Singleton
 object APIModule {
     private const val BASE_URL = "http://150.230.248.7:8080"
     @Provides
-    @Singleton
     fun provideRetrofitPair(@ForLogging loggingOkHttpClient: OkHttpClient,
                             @ForAccessToken accessTokenHttpClient: OkHttpClient): Pair<Retrofit, Retrofit> {
         val publicRetrofit = Retrofit.Builder()

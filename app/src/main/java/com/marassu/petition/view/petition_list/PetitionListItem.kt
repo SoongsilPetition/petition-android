@@ -141,7 +141,7 @@ fun PetitionListItemPreview() {
     val categoryTest = PetitionCategory("시설")
     val userTest = User("1", "안녕", "test@gmail.com", "", "")
     val petitionTest = Petition(
-        id = "-1",
+        id = -1,
         title = "이것은 제목입니다.",
         content = "임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용 임시 내용",
         imageUrl = "",
@@ -150,7 +150,8 @@ fun PetitionListItemPreview() {
         disagreement = 10,
         user = userTest,
         createdAt = "",
-        updatedAt = ""
+        updatedAt = "",
+        dueDate = ""
     )
     PetitionTheme() {
         PetitionListItem(petitionTest, {})

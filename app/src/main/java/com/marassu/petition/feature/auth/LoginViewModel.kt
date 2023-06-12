@@ -54,10 +54,10 @@ class LoginViewModel @Inject constructor(
                 }
                 .collect {
                     sharedPreferences.edit {
-                        putString(SharedPreferenceModule.ACCESS_TOKEN, it)
+                        putString(SharedPreferenceModule.ACCESS_TOKEN, it.token)
                     }
                     Timber.d("success")
-                    Timber.d("token : $it")
+                    Timber.d("token : ${it.token}")
                 }
         }
     }

@@ -105,4 +105,7 @@ dependencies {
 
     //paging
     implementation("androidx.paging:paging-runtime:${Versions.paging_runtime}")
+
+    //toggle button
+    implementation("com.robertlevonyan.compose:buttontogglegroup:${Versions.toggle}")
 }

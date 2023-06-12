@@ -37,5 +37,5 @@ object Versions {
     const val compose_bom = "2023.05.01"
     const val compose_navigation = "2.5.3"
     const val paging_runtime = "3.1.1"
-    const val paging_compose = "1.0.0"
+    const val toggle = "1.1.1"
 }

@@ -1,8 +1,13 @@
 package com.marassu.data.source
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.marassu.data.service.ConcurService
 import com.marassu.entity.concur.AgreementStatus
+import com.marassu.entity.concur.Concur
 import com.marassu.entity.concur.ConcurRequest
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Retrofit
 
 class ConcurRemoteDataSource(
@@ -11,12 +16,22 @@ class ConcurRemoteDataSource(
     private val publicConcurService: ConcurService = retrofitPair.first.create(ConcurService::class.java)
     private val tokenConcurService: ConcurService = retrofitPair.second.create(ConcurService::class.java)
 
-    suspend fun getConcurList(
-        petitionId: Int,
-        agreementStatus: AgreementStatus = AgreementStatus.AGREE,
+    fun getConcurList(
+        petitionId: Long,
         page: Int = 1,
         size: Int = 10
-    ) = publicConcurService.getConcurList(petitionId, agreementStatus, page, size)
+    ): Flow<PagingData<Concur>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+
+            pagingSourceFactory = {
+                ConcurPageSource(service = publicConcurService, petitionId)
+            }
+        ).flow
+    }
 
     suspend fun postConcur(concurRequest: ConcurRequest) =
         tokenConcurService.postConcur(concurRequest)
