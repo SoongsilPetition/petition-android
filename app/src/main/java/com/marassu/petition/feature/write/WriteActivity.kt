@@ -18,8 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,15 +37,23 @@ class WriteActivity : BaseActivity() {
         val viewModel: WriteViewModel = hiltViewModel()
 
         PetitionTheme {
-            Column(modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.White)
+            ) {
                 TopBar(
                     title = "청원 작성",
                     isBack = false,
                     onLeftClick = { finish() },
-                    onRightClick = { viewModel.write() })
-                Spacer(modifier = Modifier.height(1.dp).fillMaxWidth().background(Color.LightGray))
+                    onRightClick = {
+                        viewModel.write()
+                        finish()
+                    })
+                Spacer(modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+                    .background(Color.LightGray))
                 Column(modifier = Modifier.padding(start = 8.dp, end = 8.dp)) {
                     TextField(
                         modifier = Modifier.fillMaxWidth(),
@@ -80,7 +86,10 @@ class WriteActivity : BaseActivity() {
                         }
                     )
                 }
-                Spacer(modifier = Modifier.height(1.dp).fillMaxWidth().background(Color.LightGray))
+                Spacer(modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+                    .background(Color.LightGray))
                 Column(modifier = Modifier.padding(start = 8.dp, end = 8.dp)) {
                     TextField(
                         modifier = Modifier.fillMaxWidth(),
@@ -113,7 +122,10 @@ class WriteActivity : BaseActivity() {
                         }
                     )
                 }
-                Spacer(modifier = Modifier.height(1.dp).fillMaxWidth().background(Color.LightGray))
+                Spacer(modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+                    .background(Color.LightGray))
                 Column(modifier = Modifier.padding(start = 8.dp, end = 8.dp)) {
                     TextField(
                         modifier = Modifier.fillMaxWidth(),

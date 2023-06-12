@@ -19,7 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class WriteViewModel @Inject constructor(
     private val postPetitionUseCase: PostPetitionUseCase,
-    private val sharedPreferences: SharedPreferences,
     application: Application
 ) : AndroidViewModel(application) {
 
