@@ -46,15 +46,23 @@ class CategoryPetitionListActivity : BaseActivity() {
         val viewModel: CategoryPetitionListViewModel = hiltViewModel()
         var text = viewModel.buttonText.collectAsState()
         val myText by text
-        intent.getStringExtra(CATEGORY_NAME)?.let {
-            Scaffold(topBar = {
-                CategoryPetitionTopBar(text = myText, onClick = {
-                    viewModel.changeSetting(it)
-                })
-            }) { paddingValues ->
-                Surface(modifier = Modifier.padding(paddingValues)) {
+        val category = intent.getStringExtra(CATEGORY_NAME) ?: ""
+        val flag = viewModel.refreshEvent.collectAsState()
+        val myflag by flag
+        Scaffold(topBar = {
+            CategoryPetitionTopBar(text = myText, onClick = {
+                viewModel.update()
+            })
+        }) { paddingValues ->
+            Surface(modifier = Modifier.padding(paddingValues)) {
+                if(flag.value > 0) {
                     PetitionList(
-                        petitions = viewModel.getPetition(it).collectAsLazyPagingItems(),
+                        petitions = viewModel.changeSetting(category).collectAsLazyPagingItems(),
+                        isBottomPaddingEnabled = false
+                    )
+                } else {
+                    PetitionList(
+                        petitions = viewModel.getPetition(category).collectAsLazyPagingItems(),
                         isBottomPaddingEnabled = false
                     )
                 }
