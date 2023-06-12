@@ -1,6 +1,7 @@
 package com.marassu.petition.feature.petition_detail
 
 import android.app.Application
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -15,7 +16,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,6 +30,7 @@ class PetitionDetailViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
     val updatePetitionFlag: MutableStateFlow<Int> = MutableStateFlow(0)
     val updateConcurFlag: MutableStateFlow<Int> = MutableStateFlow(-1)
+    val concurList = mutableStateListOf<Concur>()
     var petition: Petition? = null
     var agreementStatus: AgreementStatus = AgreementStatus.AGREE
 
@@ -57,14 +61,20 @@ class PetitionDetailViewModel @Inject constructor(
                     agreementStatus = agreementStatus
                 )
             ).collect {concur ->
-                updateConcurFlag.value = 0
+                concurList.add(concur)
             }
         }
     }
 
-    fun getConcur(): Flow<PagingData<Concur>> {
-        return getConcurListUseCase.getConcurList(petitionId = petition?.id ?: -1).apply {
-            updateConcurFlag.value = 1
+    fun getConcur(){
+        viewModelScope.launch {
+            getConcurListUseCase.getConcurList(petition?.id ?: -1)
+                .catch {
+                    Timber.e("error : ${it.message}")
+                }
+                .collect {
+                    concurList.addAll(it)
+                }
         }
     }
 }

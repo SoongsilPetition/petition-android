@@ -15,7 +15,7 @@ class PetitionAnswerRepositoryImpl @Inject constructor(
         return CommonAPILogic.checkError(petitionAnswerRemoteDataSource.postPetitionAnswer(petitionAnswerRequest))
     }
 
-    override suspend fun getPetitionAnswer(petitionId: Int): Flow<PetitionAnswer> {
+    override suspend fun getPetitionAnswer(petitionId: Long): Flow<PetitionAnswer> {
         return CommonAPILogic.checkError(petitionAnswerRemoteDataSource.getPetitionAnswer(petitionId))
     }
 

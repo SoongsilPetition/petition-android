@@ -12,12 +12,8 @@ import javax.inject.Inject
 class ConcurRepositoryImpl @Inject constructor(
     private val concurRemoteDataSource: ConcurRemoteDataSource
 ): ConcurRepository {
-    override fun getConcurList(
-        petitionId: Long,
-        page: Int,
-        size: Int
-    ): Flow<PagingData<Concur>> {
-        return concurRemoteDataSource.getConcurList(petitionId, page, size)
+    override suspend fun getConcurList(petitionId: Long, page: Int, size: Int): Flow<List<Concur>> {
+        return CommonAPILogic.checkError(concurRemoteDataSource.getConcurList(petitionId, page, size))
     }
 
     override suspend fun postConcur(concurRequest: ConcurRequest): Flow<Concur> {

@@ -16,7 +16,7 @@ data class PetitionAnswer(
     @SerializedName("petitionAnswerImage")
     val image: String,
 
-    @SerializedName("com/marassu/entity/user")
+    @SerializedName("user")
     val user: User,
 
     @SerializedName("petitionId")

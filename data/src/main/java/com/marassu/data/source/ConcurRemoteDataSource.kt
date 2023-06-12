@@ -16,22 +16,11 @@ class ConcurRemoteDataSource(
     private val publicConcurService: ConcurService = retrofitPair.first.create(ConcurService::class.java)
     private val tokenConcurService: ConcurService = retrofitPair.second.create(ConcurService::class.java)
 
-    fun getConcurList(
+    suspend fun getConcurList(
         petitionId: Long,
         page: Int = 1,
         size: Int = 10
-    ): Flow<PagingData<Concur>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
-            ),
-
-            pagingSourceFactory = {
-                ConcurPageSource(service = publicConcurService, petitionId)
-            }
-        ).flow
-    }
+    ) = publicConcurService.getConcurList(petitionId, page, size)
 
     suspend fun postConcur(concurRequest: ConcurRequest) =
         tokenConcurService.postConcur(concurRequest)

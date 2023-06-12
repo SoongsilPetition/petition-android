@@ -2,6 +2,8 @@ package com.marassu.entity.petition
 
 import com.google.gson.annotations.SerializedName
 import com.marassu.entity.user.User
+import java.io.Serializable
+
 
 data class Petition(
     @SerializedName("petitionId")
@@ -36,4 +38,4 @@ data class Petition(
 
     @SerializedName("petitionDueDate")
     val dueDate: String
-)
+): Serializable

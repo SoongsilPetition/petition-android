@@ -6,7 +6,7 @@ import com.marassu.entity.concur.AgreementStatus
 class GetConcurListUseCase(
     private val concurRepository: ConcurRepository
 ) {
-    fun getConcurList(
+    suspend fun getConcurList(
         petitionId: Long,
         page: Int = 1,
         size: Int = 10

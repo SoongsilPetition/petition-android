@@ -15,7 +15,7 @@ interface PetitionAnswerService {
     suspend fun postPetitionAnswer(@Body petitionAnswerRequest: PetitionAnswerRequest): Response<PetitionAnswer>
 
     @GET("/petition/{petitionId}/answer")
-    suspend fun getPetitionAnswer(@Path("petitionId") petitionId: Int): Response<PetitionAnswer>
+    suspend fun getPetitionAnswer(@Path("petitionId") petitionId: Long): Response<PetitionAnswer>
 
     @DELETE("/petition/{petitionId}/answer")
     suspend fun deletePetitionAnswer(@Path("petitionId") petitionId: Int): Response<Unit>
