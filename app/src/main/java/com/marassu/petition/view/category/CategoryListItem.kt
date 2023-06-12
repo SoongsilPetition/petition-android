@@ -63,7 +63,7 @@ fun CategoryListItem(category: PetitionCategory, onClick: () -> Unit) {
 @Composable
 @Preview
 fun previewCategoryListItem() {
-    val category = PetitionCategory("1", "졸업")
+    val category = PetitionCategory("졸업")
     CategoryListItem(category = category) {
     }
 }
