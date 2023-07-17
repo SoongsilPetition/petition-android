@@ -71,6 +71,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation(platform("androidx.compose:compose-bom:${Versions.compose_bom}"))
     implementation("androidx.paging:paging-compose:3.2.0-beta01")
+    implementation("androidx.core:core-ktx:1.10.1")
     testImplementation("junit:junit:${Versions.junit_test}")
     androidTestImplementation("androidx.test.ext:junit:${Versions.junit_android_test}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso_core}")

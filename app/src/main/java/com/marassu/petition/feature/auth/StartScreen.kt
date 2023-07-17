@@ -19,12 +19,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.PlatformTextStyle
@@ -34,6 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.marassu.petition.MainActivity
@@ -49,11 +53,21 @@ fun StartScreen(navController: NavController) {
 
     val viewModel: StartViewModel = hiltViewModel()
     val context = LocalContext.current
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
 
-    if (viewModel.isLogin()) {
-        val intent = Intent(context, MainActivity::class.java)
-        context.startActivity(intent)
-        (context as Activity).finish()
+    viewModel.checkLogin()
+    LaunchedEffect(key1 = Unit) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewModel.eventFlow.collect { event ->
+                when (event) {
+                    is StartViewModel.Event.NavigateToHome -> {
+                        val intent = Intent(context, MainActivity::class.java)
+                        context.startActivity(intent)
+                        (context as Activity).finish()
+                    }
+                }
+            }
+        }
     }
 
     Column(

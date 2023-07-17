@@ -22,7 +22,6 @@ object DataSourceModule {
     }
 
     @Provides
-    @Singleton
     fun providesPetitionRemoteDataSource(retrofitPair: Pair<Retrofit, Retrofit>): PetitionRemoteDataSource {
         return PetitionRemoteDataSource(retrofitPair)
     }

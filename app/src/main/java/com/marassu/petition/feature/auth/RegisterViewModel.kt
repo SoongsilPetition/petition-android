@@ -13,7 +13,9 @@ import com.marassu.entity.user.UserLoginRequest
 import com.marassu.entity.user.UserRegisterRequest
 import com.marassu.petition.di.SharedPreferenceModule
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -26,6 +28,14 @@ class RegisterViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     application: Application
 ) : AndroidViewModel(application) {
+
+    sealed class Event {
+        object Failure: Event()
+        object NavigateToBack: Event()
+    }
+
+    private val _eventFlow = MutableSharedFlow<Event>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     private val _email = MutableStateFlow("")
     val email = _email.asStateFlow()
@@ -61,13 +71,12 @@ class RegisterViewModel @Inject constructor(
                     if (it is HttpException) {
                         Timber.e("code : ${it.code}, message: ${it.message}")
                     }
+                    _eventFlow.emit(Event.Failure)
                 }
                 .collect {
-//                    sharedPreferences.edit {
-//                        putString(SharedPreferenceModule.ACCESS_TOKEN, it)
-//                    }
                     Timber.d("success")
                     Timber.d("token : $it")
+                    _eventFlow.emit(Event.NavigateToBack)
                 }
         }
     }
