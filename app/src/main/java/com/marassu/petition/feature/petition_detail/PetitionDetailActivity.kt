@@ -351,7 +351,7 @@ fun PetitionBody(
                         )
                     }
                 ) {
-                    Text("$item")
+                    Text(item)
                 }
             }
         }
