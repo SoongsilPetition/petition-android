@@ -74,7 +74,7 @@ fun InfoScreen() {
                 .background(Color.LightGray)
         )
         Column(modifier = Modifier.fillMaxWidth()
-            .height(52.dp)
+            .height(48.dp)
             .clickable {
                 viewModel.logout()
                 val intent = Intent(context, AuthActivity::class.java)
