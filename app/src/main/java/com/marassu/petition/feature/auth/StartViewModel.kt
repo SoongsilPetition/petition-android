@@ -11,7 +11,9 @@ import com.marassu.domain.usecase.PostUserLoginUseCase
 import com.marassu.entity.user.UserLoginRequest
 import com.marassu.petition.di.SharedPreferenceModule
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -24,7 +26,22 @@ class StartViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    fun isLogin(): Boolean {
+    sealed class Event {
+        object NavigateToHome: Event()
+    }
+
+    private val _eventFlow = MutableSharedFlow<Event>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
+    fun checkLogin() {
+        if(isLogin()) {
+            viewModelScope.launch {
+                _eventFlow.emit(Event.NavigateToHome)
+            }
+        }
+    }
+
+    private fun isLogin(): Boolean {
         return sharedPreferences.getString(SharedPreferenceModule.ACCESS_TOKEN, "") != ""
     }
 }

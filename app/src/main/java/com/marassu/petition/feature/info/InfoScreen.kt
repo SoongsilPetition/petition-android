@@ -21,6 +21,7 @@ import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -72,25 +73,29 @@ fun InfoScreen() {
                 .fillMaxWidth()
                 .background(Color.LightGray)
         )
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 16.dp)
-                .clickable(onClick = {
-                    viewModel.logout()
-                    val intent = Intent(context, AuthActivity::class.java)
-                    context.startActivity(intent)
-                    (context as Activity).finish()
-                }),
-            text = "로그아웃",
-            color = TextMain,
-            style = TextStyle(
-                fontFamily = notosanskr,
-                fontWeight = FontWeight.Normal,
-                fontSize = 12.sp,
-                platformStyle = PlatformTextStyle(includeFontPadding = false)
+        Column(modifier = Modifier.fillMaxWidth()
+            .height(48.dp)
+            .clickable {
+                viewModel.logout()
+                val intent = Intent(context, AuthActivity::class.java)
+                context.startActivity(intent)
+                (context as Activity).finish()
+            }) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 16.dp),
+                text = "로그아웃",
+                color = TextMain,
+                style = TextStyle(
+                    fontFamily = notosanskr,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 12.sp,
+                    platformStyle = PlatformTextStyle(includeFontPadding = false)
+                )
             )
-        )
+
+        }
 
         Spacer(
             modifier = Modifier
